@@ -9,7 +9,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
 
 class Home extends StatelessWidget {
-  // int currentindex = 0;
   final List<Widget> tabs = [
     HomeScreen(),
     FavouriteScreen(),

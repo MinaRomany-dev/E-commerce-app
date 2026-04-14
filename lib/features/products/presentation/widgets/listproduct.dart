@@ -1,7 +1,9 @@
 import 'package:ecommerce2/features/products/data/models/product.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-class Listviewproduct extends StatelessWidget {
+// ignore: must_be_immutable
+class ListViewProduct extends StatelessWidget {
   List<Product> products = [
     Product(
       name: "Nike Shoes",
@@ -26,29 +28,8 @@ class Listviewproduct extends StatelessWidget {
       rate: 4.2,
       comments: 80,
       category: "Electronics",
-    ), Product(
-      name: "Smart Watch",
-      description: "Fitness tracker",
-      price: 80,
-      oldPrice: 100,
-      isFavourite: false,
-      isOnSale: true,
-      imageUrl: "https://i.imgur.com/sJ3CT4V.gif",
-      rate: 4.2,
-      comments: 80,
-      category: "Electronics",
-    ), Product(
-      name: "Smart Watch",
-      description: "Fitness tracker",
-      price: 80,
-      oldPrice: 100,
-      isFavourite: false,
-      isOnSale: true,
-      imageUrl: "https://i.imgur.com/sJ3CT4V.gif",
-      rate: 4.2,
-      comments: 80,
-      category: "Electronics",
-    ), Product(
+    ),
+    Product(
       name: "Smart Watch",
       description: "Fitness tracker",
       price: 80,
@@ -60,7 +41,31 @@ class Listviewproduct extends StatelessWidget {
       comments: 80,
       category: "Electronics",
     ),
-      Product(
+    Product(
+      name: "Smart Watch",
+      description: "Fitness tracker",
+      price: 80,
+      oldPrice: 100,
+      isFavourite: false,
+      isOnSale: true,
+      imageUrl: "https://i.imgur.com/sJ3CT4V.gif",
+      rate: 4.2,
+      comments: 80,
+      category: "Electronics",
+    ),
+    Product(
+      name: "Smart Watch",
+      description: "Fitness tracker",
+      price: 80,
+      oldPrice: 100,
+      isFavourite: false,
+      isOnSale: true,
+      imageUrl: "https://i.imgur.com/sJ3CT4V.gif",
+      rate: 4.2,
+      comments: 80,
+      category: "Electronics",
+    ),
+    Product(
       name: "Nike Shoes",
       description: "Running shoes",
       price: 120,
@@ -74,18 +79,19 @@ class Listviewproduct extends StatelessWidget {
     ),
   ];
 
+  ListViewProduct({super.key});
+
   @override
   Widget build(BuildContext context) {
-     return 
-    GridView.builder(
+    return GridView.builder(
       physics: BouncingScrollPhysics(),
-      padding: const EdgeInsets.symmetric(horizontal: 20,vertical: 20),
+      padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 20.h),
       itemCount: products.length,
-      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-        crossAxisCount: 2, 
-        mainAxisSpacing: 12,
-        crossAxisSpacing: 12,
-        childAspectRatio: .76, 
+      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+        crossAxisCount: 2,
+        mainAxisSpacing: 12.h,
+        crossAxisSpacing: 12.w,
+        childAspectRatio: .76.sp,
       ),
       itemBuilder: (context, index) {
         final product = products[index];
@@ -93,10 +99,10 @@ class Listviewproduct extends StatelessWidget {
         return Container(
           decoration: BoxDecoration(
             color: const Color.fromARGB(255, 255, 255, 255),
-            borderRadius: BorderRadius.circular(16),
+            borderRadius: BorderRadius.circular(16.r),
             boxShadow: [
               BoxShadow(
-                color: Colors.grey.withOpacity(0.1),
+                color: Colors.grey.withValues(alpha: 0.1),
                 blurRadius: 6,
                 spreadRadius: 2,
               ),
@@ -109,19 +115,19 @@ class Listviewproduct extends StatelessWidget {
               Stack(
                 children: [
                   ClipRRect(
-                    borderRadius: const BorderRadius.vertical(
-                      top: Radius.circular(16),
+                    borderRadius: BorderRadius.vertical(
+                      top: Radius.circular(16.r),
                     ),
                     child: Image.network(
                       product.imageUrl,
-                      height: 120,
+                      height: 120.h,
                       width: double.infinity,
-                      fit: BoxFit.cover, 
+                      fit: BoxFit.cover,
                     ),
                   ),
                   Positioned(
-                    bottom: 8,
-                      right: 8,
+                    bottom: 8.h,
+                    right: 8.w,
                     child: Icon(
                       product.isFavourite
                           ? Icons.favorite
@@ -133,7 +139,7 @@ class Listviewproduct extends StatelessWidget {
               ),
 
               Padding(
-                padding: const EdgeInsets.all(8),
+                padding: EdgeInsets.all(8.sp),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -145,15 +151,18 @@ class Listviewproduct extends StatelessWidget {
                       style: const TextStyle(fontWeight: FontWeight.bold),
                     ),
 
-                    const SizedBox(height: 4),
+                    SizedBox(height: 4.h),
 
-                    // Category 
+                    // Category
                     Text(
                       product.category,
-                      style: TextStyle(color: Colors.grey[500], fontSize: 12),
+                      style: TextStyle(
+                        color: Colors.grey[500],
+                        fontSize: 12.sp,
+                      ),
                     ),
 
-                    const SizedBox(height: 6),
+                    SizedBox(height: 6.h),
 
                     // Price
                     Row(
@@ -165,26 +174,26 @@ class Listviewproduct extends StatelessWidget {
                             fontWeight: FontWeight.bold,
                           ),
                         ),
-                        const SizedBox(width: 6),
+                        SizedBox(width: 6.w),
                         if (product.isOnSale)
                           Text(
                             "\$${product.oldPrice}",
-                            style: const TextStyle(
+                            style: TextStyle(
                               decoration: TextDecoration.lineThrough,
-                              fontSize: 12,
+                              fontSize: 12.sp,
                               color: Colors.grey,
                             ),
                           ),
                       ],
                     ),
 
-                    const SizedBox(height: 6),
+                    SizedBox(height: 6.h),
 
                     // Rate
                     Row(
                       children: [
-                        const Icon(Icons.star, size: 14, color: Colors.orange),
-                        const SizedBox(width: 4),
+                        Icon(Icons.star, size: 14.sp, color: Colors.orange),
+                        SizedBox(width: 4.w),
                         Text("${product.rate}"),
                       ],
                     ),

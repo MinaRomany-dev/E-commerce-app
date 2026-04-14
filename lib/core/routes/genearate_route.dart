@@ -1,4 +1,6 @@
 import 'package:ecommerce2/core/routes/routes.dart';
+import 'package:ecommerce2/features/auth/presentation/screen/login.dart';
+import 'package:ecommerce2/features/auth/presentation/screen/register.dart';
 
 import 'package:ecommerce2/features/navbar/presentation/screens/home.dart';
 import 'package:flutter/material.dart';
@@ -11,10 +13,10 @@ class GenearateRoute {
           settings: settings,
           builder:(context) => Home(),
         );
-      // case Routes.login:
-      //   return MaterialPageRoute(builder: (context) => Login());
-      //   case Routes.register:
-      //   return MaterialPageRoute(builder: (context) => Register());
+      case Routes.login:
+        return MaterialPageRoute(builder: (context) => Login());
+        case Routes.register:
+        return MaterialPageRoute(builder: (context) => Register());
 
       default:
         return _undefinedRoute();
