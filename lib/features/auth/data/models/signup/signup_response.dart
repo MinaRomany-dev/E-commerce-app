@@ -1,4 +1,4 @@
-import 'usermodel.dart';
+import '../usermodel.dart';
 
 class Signupresponse {
   String message;

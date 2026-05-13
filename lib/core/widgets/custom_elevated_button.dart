@@ -53,18 +53,18 @@ class CustomElevatedButton extends StatelessWidget {
       ),
       child: ElevatedButton(
         style: ElevatedButton.styleFrom(
-          backgroundColor:
-              gradientColors != null ? Colors.transparent : backgroundColor ?? Colors.blue,
+          backgroundColor: gradientColors != null
+              ? Colors.transparent
+              : backgroundColor ?? Colors.blue,
           shadowColor: Colors.transparent,
           shape: isStadiumBorder
               ? const StadiumBorder()
-              : RoundedRectangleBorder(
-                  borderRadius: borderRadius,
-                ),
+              : RoundedRectangleBorder(borderRadius: borderRadius),
           padding: const EdgeInsets.symmetric(horizontal: 18, vertical: 14),
         ),
         onPressed: onTap,
-        child: child ??
+        child:
+            child ??
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               mainAxisSize: MainAxisSize.min,
@@ -75,7 +75,8 @@ class CustomElevatedButton extends StatelessWidget {
                 ],
                 Text(
                   label ?? '',
-                  style: textStyle ??
+                  style:
+                      textStyle ??
                       const TextStyle(
                         color: Colors.white,
                         fontSize: 16,

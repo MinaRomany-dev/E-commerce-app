@@ -30,7 +30,7 @@ class Validators {
       return "Username is required";
     }
 
-    if (value.length < 3) {
+    if (value.length < 4) {
       return "Too short";
     }
 

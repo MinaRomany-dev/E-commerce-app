@@ -1,4 +1,4 @@
-import 'package:ecommerce2/features/auth/data/models/signup/usermodel.dart';
+import 'package:ecommerce2/features/auth/data/models/usermodel.dart';
 
 class Signinresponse {
   String message;

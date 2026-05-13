@@ -3,7 +3,6 @@ import 'package:ecommerce2/core/widgets/customtxtfield.dart';
 import 'package:ecommerce2/features/auth/presentation/screen/login.dart';
 import 'package:flutter/material.dart';
 
-
 class Register extends StatelessWidget {
   static const String routename = "/register";
 
@@ -11,15 +10,14 @@ class Register extends StatelessWidget {
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
 
-  Register({super.key});  
+  Register({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-      
+
       body: SafeArea(
-        
         child: SingleChildScrollView(
           padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 20),
           child: Column(
@@ -37,10 +35,7 @@ class Register extends StatelessWidget {
               const SizedBox(height: 8),
               Text(
                 "Create an account on MNZL to get all features",
-                style: TextStyle(
-                  fontSize: 16,
-                  color: Colors.grey[700],
-                ),
+                style: TextStyle(fontSize: 16, color: Colors.grey[700]),
               ),
               const SizedBox(height: 50),
 
@@ -99,8 +94,7 @@ class Register extends StatelessWidget {
                   color: Colors.transparent,
                   child: InkWell(
                     borderRadius: BorderRadius.circular(15),
-                    onTap: () {
-                    },
+                    onTap: () {},
                     child: const Center(
                       child: Text(
                         "CREATE",
@@ -127,8 +121,9 @@ class Register extends StatelessWidget {
                   ),
                   InkWell(
                     onTap: () {
-                      Navigator.of(context)
-                          .pushReplacementNamed(Login.routename);
+                      Navigator.of(
+                        context,
+                      ).pushReplacementNamed(Login.routename);
                     },
                     child: const Text(
                       "Login here",

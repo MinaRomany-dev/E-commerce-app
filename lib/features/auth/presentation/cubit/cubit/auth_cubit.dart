@@ -5,13 +5,14 @@ import 'package:ecommerce2/features/auth/domain/use_case/register.dart';
 import 'package:ecommerce2/features/auth/presentation/cubit/cubit/auth_state.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
-@injectable
+
+@singleton
 class AuthCubit extends Cubit<AuthState> {
-final  LoginUseCase login;
-final RegisterUseCase register;
+  final LoginUseCase login;
+  final RegisterUseCase register;
   AuthCubit(this.login, this.register) : super(AuthInitial());
 
- Future<void> Login(Signinrequest request) async {
+  Future<void> Login(Signinrequest request) async {
     emit(LoginLoading());
 
     final result = await login(request);
@@ -21,7 +22,7 @@ final RegisterUseCase register;
     );
   }
 
-Future <void> Register(Signuprequest request) async {
+  Future<void> Register(Signuprequest request) async {
     emit(RegisterLoading());
 
     final result = await register(request);

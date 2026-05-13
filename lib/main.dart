@@ -3,19 +3,19 @@ import 'package:ecommerce2/core/routes/genearate_route.dart';
 import 'package:ecommerce2/core/routes/routes.dart';
 import 'package:ecommerce2/core/appobserver.dart';
 import 'package:ecommerce2/features/auth/presentation/cubit/cubit/auth_cubit.dart';
+import 'package:ecommerce2/features/home/presentation/cubit/product_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 void main() async {
-  WidgetsFlutterBinding.ensureInitialized();
+  //  WidgetsFlutterBinding.ensureInitialized();
   // await Supabase.initialize(
   //   url: 'https://hkvdgfdjohgzajvndnwa.supabase.co',
   //   anonKey: 'sb_publishable_Cv3rMIuda3L04_tFQTi7hA_axXTFXXf',
   // );
   Bloc.observer = AppBlocObserver();
   setupLocator();
-
   runApp(const Ecommerce());
 }
 
@@ -24,8 +24,15 @@ class Ecommerce extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => servicelocator.get<AuthCubit>(),
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(create: (context) => servicelocator.get<AuthCubit>()),
+        BlocProvider(
+          create: (context) =>
+              servicelocator.get<ProductCubit>()..fetchproducts(),
+        ),
+      ],
+
       child: ScreenUtilInit(
         designSize: const Size(360, 690),
         minTextAdapt: true,
@@ -33,7 +40,7 @@ class Ecommerce extends StatelessWidget {
         builder: (_, child) {
           return MaterialApp(
             debugShowCheckedModeBanner: false,
-            initialRoute: Routes.login,
+            initialRoute: Routes.home,
             onGenerateRoute: GenearateRoute.generateRoute,
           );
         },
