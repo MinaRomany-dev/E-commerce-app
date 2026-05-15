@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:ecommerce2/features/home/domain/entities/product_entity.dart';
 import 'package:ecommerce2/features/home/presentation/screens/widgets/listview_search.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-
 class SearchScreen extends SearchDelegate {
   final List<ProductEntity> products;
   SearchScreen({required this.products});
@@ -99,7 +98,7 @@ class SearchScreen extends SearchDelegate {
     if (filtered.isEmpty) {
       return Container(
         color: Colors.white,
-        child: Column(
+        child:  Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Icon(Icons.search, size: 50.sp, color: Colors.grey),
@@ -125,7 +124,7 @@ class SearchScreen extends SearchDelegate {
       );
     }
 
-    return Container(
+    return  Container(
       color: Colors.white,
       child: ListViewSearch(products: filtered),
     );

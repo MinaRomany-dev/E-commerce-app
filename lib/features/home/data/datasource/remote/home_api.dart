@@ -12,9 +12,13 @@ class HomeApi implements HomeDatasource {
 const  HomeApi({required this.apiManager});
 
   @override
-  Future<ProductResponse> getProducts() async {
+  Future<ProductResponse> getProducts(int? pagenumber) async {
     try {
       final response = await apiManager.getData(
+        queryParameters: {
+          'limit': 20,
+          "page": pagenumber,
+        },
         endPoint: Constants.productEndPoint,
       );
       return ProductResponse.fromJson(response.data);

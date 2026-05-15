@@ -1,9 +1,8 @@
-import 'package:ecommerce2/core/resources/styles_manager.dart';
 import 'package:ecommerce2/features/home/presentation/cubit/product_cubit.dart';
 import 'package:ecommerce2/features/home/presentation/listproduct.dart';
-import 'package:ecommerce2/features/home/presentation/screens/custom_search.dart';
 import 'package:ecommerce2/features/home/presentation/screens/widgets/horizontal_list.dart';
 import 'package:ecommerce2/features/home/presentation/screens/widgets/product_shimmer.dart';
+import 'package:ecommerce2/features/home/presentation/screens/widgets/search_side.dart';
 import 'package:ecommerce2/gen/assets.gen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -18,7 +17,16 @@ class Hometab extends StatefulWidget {
 }
 
 class _HometabState extends State<Hometab> {
-  int selectedcategory = 0;
+  String selectedcategory = 'All';
+
+  @override
+  void initState() {
+    super.initState();
+    context.read<ProductCubit>().onScroll();
+    print("INIT STATE");
+    //  context.read<ProductCubit>().fetchProducts();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -26,52 +34,11 @@ class _HometabState extends State<Hometab> {
       children: [
         Row(
           children: [
-            //* Search Container
-            Expanded(
-              child: InkWell(
-                onTap: () {
-                  final state = context.read<ProductCubit>().state;
+            // Search Container
+            SearchSide(),
 
-                  if (state is ProductLoaded) {
-                    showSearch(
-                      context: context,
-                      delegate: SearchScreen(products: state.products),
-                    );
-                  }
-                },
-                child: Container(
-                  margin: EdgeInsets.symmetric(horizontal: 5.w, vertical: 10.h),
-                  height: 42.h,
-                  decoration: BoxDecoration(
-                    border: Border.all(color: Colors.grey),
-                    color: Colors.white,
-                    borderRadius: BorderRadius.circular(25.r),
-                  ),
-                  child: Align(
-                    alignment: AlignmentGeometry.centerStart,
-                    child: Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 30.w),
-                      child: Row(
-                        children: [
-                          Icon(Icons.search, color: Colors.grey),
-                          SizedBox(width: 10.w),
-                          Text(
-                            textAlign: TextAlign.left,
-                            "Search",
-                            style: getRegularStyle(
-                              color: Colors.grey,
-                              fontSize: 14.sp,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-                ),
-              ),
-            ),
             SizedBox(width: 6.w),
-            //* filter
+            // filter
             Container(
               margin: EdgeInsets.only(right: 10.w),
               child: SvgPicture.asset(
@@ -83,11 +50,13 @@ class _HometabState extends State<Hometab> {
             ),
           ],
         ),
-        // *Category list
+
+        //        Category list
         SizedBox(height: 10.h),
         CategoryListView(onTab: onTap),
         SizedBox(height: 10.h),
-        //* Grid View
+
+        //          Grid View
         Expanded(
           child: BlocBuilder<ProductCubit, ProductState>(
             builder: (context, state) {
@@ -96,12 +65,24 @@ class _HometabState extends State<Hometab> {
               } else if (state is ProductError) {
                 return Center(child: Text(state.message));
               } else if (state is ProductLoaded) {
-                return ListViewProduct(products: state.products);
+                final products = selectedcategory == 'All'
+                    ? state.products
+                    : state.products.where((product) {
+                        return product.category.name.toLowerCase().startsWith(
+                          selectedcategory.toLowerCase(),
+                        );
+                      }).toList();
+
+                return ListViewProduct(
+                  controller: context.read<ProductCubit>().scrollController,
+
+                  products: products,
+                );
               }
               return SizedBox(
                 height: 100.h,
                 width: 100.w,
-                child: Text("No data"),
+                child: Center(child: Text("No data")),
               );
             },
           ),
@@ -110,8 +91,9 @@ class _HometabState extends State<Hometab> {
     );
   }
 
-  void onTap(int selectedIndex) {
-    selectedcategory = selectedIndex;
-    print('*************************$selectedcategory************************');
+  void onTap(String selectedCategory) {
+    setState(() {
+      selectedcategory = selectedCategory;
+    });
   }
 }

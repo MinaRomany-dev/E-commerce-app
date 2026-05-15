@@ -1,7 +1,6 @@
 import 'package:ecommerce2/core/routes/routes.dart';
 import 'package:ecommerce2/features/auth/presentation/screen/login.dart';
 import 'package:ecommerce2/features/auth/presentation/screen/register.dart';
-
 import 'package:ecommerce2/features/home/presentation/screens/home.dart';
 import 'package:flutter/material.dart';
 

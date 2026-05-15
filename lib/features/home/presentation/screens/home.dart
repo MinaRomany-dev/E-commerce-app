@@ -1,5 +1,5 @@
 import 'package:ecommerce2/core/resources/styles_manager.dart';
-import 'package:ecommerce2/features/home/presentation/screens/favourite.dart';
+import 'package:ecommerce2/features/home/presentation/screens/favourite_tab.dart';
 import 'package:ecommerce2/features/home/presentation/screens/home_tab.dart';
 import 'package:ecommerce2/features/home/presentation/screens/profile.dart';
 import 'package:flutter/material.dart';

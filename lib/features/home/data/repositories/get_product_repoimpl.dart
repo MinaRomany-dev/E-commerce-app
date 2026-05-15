@@ -12,11 +12,11 @@ class ProductRepoimpl implements ProductReposiroty {
   final HomeDatasource homeDatasource;
   ProductRepoimpl({required this.homeDatasource});
 @override
-  Future<Either<AppFailure, List<ProductEntity>>> getProducts() async {
+  Future<Either<AppFailure, List<ProductEntity>>> getProducts(int? pagenumber) async {
     try {
-      final response = await homeDatasource.getProducts();
+      final response = await homeDatasource.getProducts(pagenumber);
 
-      return Right(response.products!.map((e) => e.toEntity()).toList());
+      return Right(response.products?.map((e) => e.toEntity()).toList() ?? []);
     } on AppExceptions catch (e) {
       return Left(mapExceptionToFailure(e));
     }

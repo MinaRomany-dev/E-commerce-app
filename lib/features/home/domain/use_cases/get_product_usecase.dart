@@ -9,7 +9,7 @@ class GetProductUsecase {
   final ProductReposiroty reposiroty;
   GetProductUsecase({required this.reposiroty});
 
-  Future<Either<AppFailure, List<ProductEntity>>> call() {
-    return reposiroty.getProducts();
+  Future<Either<AppFailure, List<ProductEntity>>> call(int? page) {
+    return reposiroty.getProducts(page);
   }
 }

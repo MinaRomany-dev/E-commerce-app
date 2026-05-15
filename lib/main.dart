@@ -9,6 +9,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 void main() async {
+ // debugPrintRebuildDirtyWidgets = true;
   //  WidgetsFlutterBinding.ensureInitialized();
   // await Supabase.initialize(
   //   url: 'https://hkvdgfdjohgzajvndnwa.supabase.co',
@@ -29,7 +30,7 @@ class Ecommerce extends StatelessWidget {
         BlocProvider(create: (context) => servicelocator.get<AuthCubit>()),
         BlocProvider(
           create: (context) =>
-              servicelocator.get<ProductCubit>()..fetchproducts(),
+              servicelocator.get<ProductCubit>()..fetchProducts(),
         ),
       ],
 
@@ -39,6 +40,7 @@ class Ecommerce extends StatelessWidget {
         splitScreenMode: true,
         builder: (_, child) {
           return MaterialApp(
+          
             debugShowCheckedModeBanner: false,
             initialRoute: Routes.home,
             onGenerateRoute: GenearateRoute.generateRoute,

@@ -8,25 +8,6 @@ class ProfileScreen extends StatefulWidget {
 }
 
 class _ProfileScreenState extends State<ProfileScreen> {
-  // late Usermodel user ;
-  //  bool  isloading =true;
-  // @override
-  // void initState() {
-  //   super.initState();
-  //   loadUser();
-  // }
-  // Future<void> loadUser() async {
-
-  //   try {
-  //     final data = await suba.getUser();
-  //     setState(() {
-  //       user = data!;
-  //     });
-  //     isloading=false;
-  //   } catch (e) {
-  //     print(e);
-  //   }
-  // }
   @override
   Widget build(BuildContext context) {
     return SafeArea(
