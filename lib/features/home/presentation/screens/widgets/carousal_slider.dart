@@ -17,9 +17,7 @@ class _CarousalsliderState extends State<Carousalslider> {
     Assets.images.dress.path,
     Assets.images.tshirt.path,
     Assets.images.children.path,
-   // 'https://images.pexels.com/photos/5632402/pexels-photo-5632402.jpeg',
   ];
-
   int activeIndex = 0;
 
   @override

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:toastification/toastification.dart';
 
 abstract class AppToast {
@@ -9,19 +10,20 @@ abstract class AppToast {
     required ToastificationType type,
   }) {
     toastification.show(
+
       context: context,
-      alignment: Alignment.bottomLeft,
+     alignment: Alignment.bottomLeft,
       type: type,
       title: Text(
         title,
-        style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+        style:  TextStyle(fontSize: 16.sp, fontWeight: FontWeight.bold),
       ),
       description: Text(
         description,
-        style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w400),
+        style:  TextStyle(fontSize: 14.sp, fontWeight: FontWeight.w400),
       ),
       primaryColor: Colors.white,
-      autoCloseDuration: const Duration(seconds: 3),
+      autoCloseDuration: const Duration(seconds: 2),
       progressBarTheme: ProgressIndicatorThemeData(
         color: type == ToastificationType.success
             ? Colors.green

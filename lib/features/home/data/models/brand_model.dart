@@ -4,7 +4,7 @@ class BrandModel {
   String? slug;
   String? image;
 
-  BrandModel({required  this.id, this.name, this.slug, this.image});
+  BrandModel({required this.id, this.name, this.slug, this.image});
 
   factory BrandModel.fromJson(Map<String, dynamic> json) => BrandModel(
     id: json['_id'] as String,

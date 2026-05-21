@@ -1,35 +1,63 @@
 import 'package:dio/dio.dart';
 import 'package:ecommerce2/core/constants/constants.dart';
+import 'package:ecommerce2/features/auth/data/data_source/local/local_datasource.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 import 'package:injectable/injectable.dart';
 
 @singleton
 class ApiManager {
+  final LocalauthDatasouce localauthDatasouce;
   late final Dio dio;
-  ApiManager() {
+  String? _cachedToken;
+  ApiManager(this.localauthDatasouce) {
+    print("🔥 API MANAGER INSTANCE CREATED");
     dio = Dio(
       BaseOptions(
         baseUrl: Constants.baseUrl,
         connectTimeout: const Duration(seconds: 20),
         receiveTimeout: const Duration(seconds: 20),
-        headers: {
-          "Accept": "application/json",
-          "Content-Type": "application/json",
-        },
+        sendTimeout: const Duration(seconds: 20),
         followRedirects: true,
         validateStatus: (status) => status != null && status < 500,
       ),
     );
 
     dio.interceptors.add(
+      InterceptorsWrapper(
+        onRequest: (options, handler) async {
+          final isAuthRequest =
+              options.path.contains('/auth/') ||
+              options.path.contains('/signin') ||
+              options.path.contains('/signup');
+
+          if (!isAuthRequest) {
+            _cachedToken ??= await localauthDatasouce.getToken();
+
+            if (_cachedToken != null && _cachedToken!.isNotEmpty) {
+              options.headers["token"] = _cachedToken;
+
+              print(
+                "✅ Token Added from cache: ${_cachedToken!.substring(0, 30)}...",
+              );
+            } else {
+              print("❌ No token in cache!");
+            }
+          }
+
+          return handler.next(options);
+        },
+      ),
+    );
+
+    dio.interceptors.add(
       PrettyDioLogger(
+        responseBody: true,
+        request: true,
         requestHeader: true,
         requestBody: true,
         responseHeader: true,
-        responseBody: true,
-        error: true,
         compact: true,
-        maxWidth: 90,
+        error: true,
       ),
     );
   }
@@ -94,5 +122,15 @@ class ApiManager {
       queryParameters: queryParameters,
       options: (options ?? Options()).copyWith(headers: headers),
     );
+  }
+
+  // ←←← أضف الدالتين دول
+  void updateToken(String newToken) {
+    _cachedToken = newToken;
+    print("🔄 Token updated in ApiManager cache");
+  }
+
+  void clearToken() {
+    _cachedToken = null;
   }
 }

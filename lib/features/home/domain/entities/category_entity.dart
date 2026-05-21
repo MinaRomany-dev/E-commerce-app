@@ -4,17 +4,13 @@ class CategoryEntity {
   final String slug;
   final String? image;
 
-  CategoryEntity({
+ const CategoryEntity({
     required this.id,
     required this.name,
     required this.slug,
     this.image,
   });
 
-  factory CategoryEntity.empty() => CategoryEntity(
-        id: '',
-        name: '',
-        slug: '',
-        image: null,
-      );
+  factory CategoryEntity.empty() =>const
+      CategoryEntity(id: '', name: '', slug: '', image: null);
 }

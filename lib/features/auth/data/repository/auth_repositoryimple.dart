@@ -1,3 +1,5 @@
+import 'package:ecommerce2/core/api/api_manager.dart';
+import 'package:ecommerce2/core/di/service_locator.dart';
 import 'package:ecommerce2/core/error/exceptions.dart';
 import 'package:ecommerce2/core/error/failure.dart';
 import 'package:ecommerce2/core/error/failure_handler.dart';
@@ -19,15 +21,20 @@ class AuthRepositoryImpl implements AuthRepository {
 
   AuthRepositoryImpl(this.localauthDatasouce, this.remoteauthDatasouce);
 
-  Future<Either<AppFailure, User>> login(Signinrequest request) async {
-    try {
-      final response = await remoteauthDatasouce.login(request);
-      await localauthDatasouce.saveToken(response.token);
-      return Right(response.user.toEntity);
-    } on AppExceptions catch (e) {
-      return left(mapExceptionToFailure(e));
-    }
+Future<Either<AppFailure, User>> login(Signinrequest request) async {
+  try {
+    final response = await remoteauthDatasouce.login(request);
+    
+    await localauthDatasouce.saveToken(response.token);
+    
+    // ←←← أهم سطر جديد
+servicelocator.get<ApiManager>().updateToken(response.token);
+
+    return Right(response.user.toEntity);
+  } on AppExceptions catch (e) {
+    return Left(mapExceptionToFailure(e));
   }
+}
 
   Future<Either<AppFailure, User>> register(Signuprequest request) async {
     try {

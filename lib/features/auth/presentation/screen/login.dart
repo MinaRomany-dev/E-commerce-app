@@ -1,4 +1,5 @@
 import 'package:ecommerce2/core/routes/routes.dart';
+import 'package:ecommerce2/core/utils/toast.dart';
 import 'package:ecommerce2/core/validator/validator.dart';
 import 'package:ecommerce2/core/widgets/customtxtfield.dart';
 import 'package:ecommerce2/features/auth/data/models/signin/sigin_request.dart';
@@ -8,6 +9,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:toastification/toastification.dart';
 
 class Login extends StatelessWidget {
   static const String routename = "/login";
@@ -27,10 +29,14 @@ class Login extends StatelessWidget {
         }
 
         if (state is LoginSuccess) {
-          Fluttertoast.showToast(
-            msg: "Login success",
-            backgroundColor: Colors.green,
-          );
+        AppToast.showToast(
+          
+          context: context,
+          title: "Success",
+          description: "Login Successfully",
+          type: ToastificationType.success,
+        );
+        Navigator.of(context).pushNamed(Routes.home);
         }
       },
       builder: (context, state) {
@@ -93,13 +99,13 @@ class Login extends StatelessWidget {
                             SizedBox(height: 25),
                             SizedBox(
                               width: 120.w,
-                              height: 50,
+                              height: 60.h,
                               child: ElevatedButton(
                                 onPressed: state is LoginLoading
                                     ? null
-                                    : () {
+                                    : ()async {
                                         if (_formKey.currentState!.validate()) {
-                                          context.read<AuthCubit>().Login(
+                                     await     context.read<AuthCubit>().Login(
                                             Signinrequest(
                                               email: _emailController.text,
                                               password:
@@ -111,14 +117,14 @@ class Login extends StatelessWidget {
                                 style: ElevatedButton.styleFrom(
                                   padding: EdgeInsets.zero,
                                   shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(20),
+                                    borderRadius: BorderRadius.circular(10),
                                   ),
                                   backgroundColor: Colors.transparent,
-                                  elevation: 8,
+                                  elevation: 5,
                                 ),
                                 child: Ink(
                                   decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(20),
+                                    borderRadius: BorderRadius.circular(10),
                                     gradient: const LinearGradient(
                                       colors: [
                                         Color(0xFF8EDDFF),
@@ -131,10 +137,10 @@ class Login extends StatelessWidget {
                                   child: Center(
                                     child: state is LoginLoading
                                         ? SizedBox(
-                                            height: 5,
+                                            height: 10.h,
                                             child: CircularProgressIndicator(
                                               color: Colors.white,
-                                              strokeWidth: 2,
+                                            //  strokeWidth: 2,
                                             ),
                                           )
                                         : const Text(

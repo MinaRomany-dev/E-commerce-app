@@ -23,7 +23,7 @@ class _CategoryListViewState extends State<CategoryListView> {
     return SizedBox(
       height: 38.h,
       child: ListView.separated(
-        physics:const BouncingScrollPhysics(),
+        physics: const BouncingScrollPhysics(),
         padding: EdgeInsets.symmetric(horizontal: 10.w),
         scrollDirection: Axis.horizontal,
         itemCount: categories.length,

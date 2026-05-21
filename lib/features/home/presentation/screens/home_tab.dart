@@ -18,13 +18,17 @@ class Hometab extends StatefulWidget {
 
 class _HometabState extends State<Hometab> {
   String selectedcategory = 'All';
+  late ScrollController _scrollController;
+  @override
+  void dispose() {
+    _scrollController.dispose();
+    super.dispose();
+  }
 
   @override
   void initState() {
     super.initState();
-    context.read<ProductCubit>().onScroll();
-    print("INIT STATE");
-    //  context.read<ProductCubit>().fetchProducts();
+    _scrollController = ScrollController()..addListener(_onScroll);
   }
 
   @override
@@ -74,7 +78,7 @@ class _HometabState extends State<Hometab> {
                       }).toList();
 
                 return ListViewProduct(
-                  controller: context.read<ProductCubit>().scrollController,
+                  controller: _scrollController,
 
                   products: products,
                 );
@@ -95,5 +99,13 @@ class _HometabState extends State<Hometab> {
     setState(() {
       selectedcategory = selectedCategory;
     });
+  }
+
+  void _onScroll() {
+    if (_scrollController.position.maxScrollExtent ==
+        _scrollController.position.pixels) {
+      print("**********************************SCROLLING");
+      context.read<ProductCubit>().loadNextPage();
+    }
   }
 }

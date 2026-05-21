@@ -9,12 +9,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 void main() async {
- // debugPrintRebuildDirtyWidgets = true;
-  //  WidgetsFlutterBinding.ensureInitialized();
-  // await Supabase.initialize(
-  //   url: 'https://hkvdgfdjohgzajvndnwa.supabase.co',
-  //   anonKey: 'sb_publishable_Cv3rMIuda3L04_tFQTi7hA_axXTFXXf',
-  // );
+
   Bloc.observer = AppBlocObserver();
   setupLocator();
   runApp(const Ecommerce());
@@ -40,7 +35,6 @@ class Ecommerce extends StatelessWidget {
         splitScreenMode: true,
         builder: (_, child) {
           return MaterialApp(
-          
             debugShowCheckedModeBanner: false,
             initialRoute: Routes.home,
             onGenerateRoute: GenearateRoute.generateRoute,

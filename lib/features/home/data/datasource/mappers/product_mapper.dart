@@ -19,7 +19,5 @@ extension ProductMapper on ProductModel {
     priceAfterDiscount: priceAfterDiscount ?? 0,
     quantity: quantity ?? 0,
     ratingsAverage: ratingsAverage ?? 0,
-  ) ;
-
- 
+  );
 }

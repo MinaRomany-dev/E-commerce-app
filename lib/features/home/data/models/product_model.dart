@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'brand_model.dart';
 import 'category_model.dart';
 import 'subcategory.dart';
@@ -19,7 +21,6 @@ class ProductModel {
   double? ratingsAverage;
   DateTime? createdAt;
   DateTime? updatedAt;
- 
   int? priceAfterDiscount;
   List<dynamic>? availableColors;
 
@@ -28,7 +29,7 @@ class ProductModel {
     this.images,
     this.subcategory,
     this.ratingsQuantity,
-  required  this.id,
+    required this.id,
     this.title,
     this.slug,
     this.description,
@@ -40,14 +41,14 @@ class ProductModel {
     this.ratingsAverage,
     this.createdAt,
     this.updatedAt,
-  
+
     this.priceAfterDiscount,
     this.availableColors,
   });
 
   factory ProductModel.fromJson(Map<String, dynamic> json) => ProductModel(
     sold: json['sold'] as int?,
-  images: List<String>.from(json['images'] ?? []),
+    images: List<String>.from(json['images'] ?? []),
     subcategory: (json['subcategory'] as List<dynamic>?)
         ?.map((e) => Subcategory.fromJson(e as Map<String, dynamic>))
         .toList(),
@@ -76,4 +77,34 @@ class ProductModel {
     availableColors: json['availableColors'] as List<dynamic>?,
   );
 
+  Map<String, dynamic> toJson() {
+    return {
+      'id': id,
+      'title': title,
+      'description': description,
+      'price': price,
+      'imageCover': imageCover,
+      'images': jsonEncode(images),
+      'categoryName': category?.name,
+      'ratingsAverage': ratingsAverage,
+      'ratingsQuantity': ratingsQuantity,
+      'priceAfterDiscount': priceAfterDiscount,
+    };
+  }
+
+  factory ProductModel.fromMap(Map<String, dynamic> map) {
+    return ProductModel(
+      id: map['id'],
+      title: map['title'],
+      description: map['description'],
+      price: map['price'],
+      imageCover: map['imageCover'],
+      images: List<String>.from(jsonDecode(map['images'] ?? '[]')),
+
+      ratingsAverage: map['ratingsAverage']?.toDouble(),
+      ratingsQuantity: map['ratingsQuantity'],
+      priceAfterDiscount: map['priceAfterDiscount'],
+      category: CategoryModel.fromMap({'name': map['categoryName']}),
+    );
+  }
 }

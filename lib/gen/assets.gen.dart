@@ -14,6 +14,10 @@ import 'package:flutter/widgets.dart';
 class $AssetsImagesGen {
   const $AssetsImagesGen();
 
+  /// File path: assets/images/Cart-duotone.png
+  AssetGenImage get cartDuotone =>
+      const AssetGenImage('assets/images/Cart-duotone.png');
+
   /// File path: assets/images/Group 32.png
   AssetGenImage get group32 =>
       const AssetGenImage('assets/images/Group 32.png');
@@ -82,6 +86,7 @@ class $AssetsImagesGen {
 
   /// List of all assets
   List<dynamic> get values => [
+    cartDuotone,
     group32,
     group33,
     group34,

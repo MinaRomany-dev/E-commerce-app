@@ -10,10 +10,6 @@ class BrandEntity {
     required this.image,
   });
 
-   factory BrandEntity.empty() => BrandEntity(
-        id: '',
-        name: '',
-        slug: '',
-        image: null,
-      );
+  factory BrandEntity.empty() =>
+      BrandEntity(id: '', name: '', slug: '', image: null);
 }

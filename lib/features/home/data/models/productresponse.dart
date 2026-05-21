@@ -14,12 +14,11 @@ class ProductResponse {
       metadata: json['metadata'] == null
           ? null
           : Metadata.fromJson(json['metadata'] as Map<String, dynamic>),
-      products: (json['data'] as List<dynamic>?)
-          ?.map((e) => ProductModel
-          .fromJson(e as Map<String, dynamic>))
-          .toList() ?? [],
+      products:
+          (json['data'] as List<dynamic>?)
+              ?.map((e) => ProductModel.fromJson(e as Map<String, dynamic>  ))
+              .toList() ??
+          [],
     );
   }
-
- 
 }

@@ -14,7 +14,7 @@ class Subcategory {
     return Subcategory(
       id: json["_id"],
       name: json["name"] as String?,
-      slug: json["slug"] as String? ,
+      slug: json["slug"] as String?,
       categoryId: json["categoryId"] as String?,
     );
   }

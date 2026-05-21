@@ -1,6 +1,6 @@
-
 import 'package:ecommerce2/features/home/domain/entities/brand_entity.dart';
 import 'package:ecommerce2/features/home/domain/entities/category_entity.dart';
+
 class ProductEntity {
   final String id;
   final String title;
@@ -17,7 +17,7 @@ class ProductEntity {
   final int? sold;
   final int? ratingsQuantity;
 
-  ProductEntity({
+ const ProductEntity({
     required this.id,
     required this.title,
     required this.slug,
@@ -35,16 +35,18 @@ class ProductEntity {
   });
 
   factory ProductEntity.empty() => ProductEntity(
-        id: '',
-        title: '',
-        slug: '',
-        description: '',
-        quantity: 0,
-        price: 0,
-        imageCover: '',
-        images: [],
-        ratingsAverage: 0.0,
-        category: CategoryEntity.empty(),
-        brand: BrandEntity.empty(),
-      );
+    id: '',
+    title: '',
+    slug: '',
+    description: '',
+    quantity: 0,
+    price: 0,
+    imageCover: '',
+    images: [],
+    ratingsAverage: 0.0,
+    category: CategoryEntity.empty(),
+    brand: BrandEntity.empty(),
+    sold: 0,
+    ratingsQuantity: 0,
+  );
 }

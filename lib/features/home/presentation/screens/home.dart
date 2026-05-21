@@ -1,4 +1,5 @@
 import 'package:ecommerce2/core/resources/styles_manager.dart';
+import 'package:ecommerce2/features/cart/presentation/screens/cart_screen.dart';
 import 'package:ecommerce2/features/home/presentation/screens/favourite_tab.dart';
 import 'package:ecommerce2/features/home/presentation/screens/home_tab.dart';
 import 'package:ecommerce2/features/home/presentation/screens/profile.dart';
@@ -18,8 +19,8 @@ class _HomeState extends State<Home> {
 
   final List<Widget> tabs = [
     Hometab(),
+    CartScreen(),
     FavouriteScreen(),
-    Center(child: Text("data")),
     ProfileScreen(),
   ];
 

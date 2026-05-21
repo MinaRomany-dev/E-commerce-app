@@ -1,16 +1,12 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:ecommerce2/features/home/domain/entities/product_entity.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class ListViewSearch extends StatelessWidget {
   final List<ProductEntity> products;
 
-  const ListViewSearch({
-    super.key,
-    required this.products,
-  });
+  const ListViewSearch({super.key, required this.products});
 
   @override
   Widget build(BuildContext context) {
@@ -71,9 +67,7 @@ class ListViewSearch extends StatelessWidget {
                         product.title,
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
-                        style: const TextStyle(
-                          fontWeight: FontWeight.bold,
-                        ),
+                        style: const TextStyle(fontWeight: FontWeight.bold),
                       ),
 
                       //* Category
@@ -102,8 +96,7 @@ class ListViewSearch extends StatelessWidget {
                           Text(
                             "\$${product.price}",
                             style: TextStyle(
-                              decoration:
-                                  TextDecoration.lineThrough,
+                              decoration: TextDecoration.lineThrough,
                               fontSize: 11.sp,
                               color: Colors.grey,
                             ),
@@ -114,23 +107,19 @@ class ListViewSearch extends StatelessWidget {
                       //* Rating
                       Row(
                         children: [
-                          Icon(
-                            Icons.star,
-                            size: 13.sp,
-                            color: Colors.orange,
-                          ),
+                          Icon(Icons.star, size: 13.sp, color: Colors.orange),
 
                           SizedBox(width: 4.w),
 
-                          Text(
-                            "${product.ratingsAverage}",
-                          ),
+                          Text("${product.ratingsAverage}"),
                         ],
                       ),
                     ],
                   ),
                 ),
               ],
+
+              //
             ),
           ),
         );

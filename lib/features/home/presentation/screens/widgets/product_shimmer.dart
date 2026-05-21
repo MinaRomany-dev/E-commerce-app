@@ -1,19 +1,17 @@
 import 'package:shimmer/shimmer.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+
 class ProductGridShimmer extends StatelessWidget {
   const ProductGridShimmer({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return  GridView.builder(
+    return GridView.builder(
       itemCount: 4,
       shrinkWrap: true,
       physics: const NeverScrollableScrollPhysics(),
-      padding: EdgeInsets.symmetric(
-        horizontal: 5.w,
-        vertical: 5.h,
-      ),
+      padding: EdgeInsets.symmetric(horizontal: 5.w, vertical: 5.h),
       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
         crossAxisCount: 2,
         mainAxisSpacing: 12.h,
@@ -32,14 +30,12 @@ class ProductGridShimmer extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-
                 /// IMAGE
                 Container(
-
                   height: 130.h,
                   width: double.infinity,
                   decoration: BoxDecoration(
-                     color: const Color.fromARGB(255, 97, 95, 95),
+                    color: const Color.fromARGB(255, 97, 95, 95),
                     borderRadius: BorderRadius.only(
                       topLeft: Radius.circular(9.r),
                       topRight: Radius.circular(9.r),
@@ -53,7 +49,6 @@ class ProductGridShimmer extends StatelessWidget {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-
                         /// TITLE
                         Container(
                           height: 12.h,
@@ -71,7 +66,7 @@ class ProductGridShimmer extends StatelessWidget {
                           height: 10.h,
                           width: 70.w,
                           decoration: BoxDecoration(
-                          color: const Color.fromARGB(255, 97, 95, 95),
+                            color: const Color.fromARGB(255, 97, 95, 95),
                             borderRadius: BorderRadius.circular(8.r),
                           ),
                         ),
@@ -103,7 +98,7 @@ class ProductGridShimmer extends StatelessWidget {
                         //   ],
                         // ),
 
-                     //   SizedBox(height: 12.h),
+                        //   SizedBox(height: 12.h),
 
                         /// RATING
                         // Row(
