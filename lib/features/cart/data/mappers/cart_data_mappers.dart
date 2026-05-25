@@ -5,8 +5,8 @@ import 'package:ecommerce2/features/cart/domain/entities/cart_data_entity.dart';
 extension CartDataMappers on CartDataModel {
   CartDataEntity toEntity() => CartDataEntity(
     id: id,
-    cartOwner: cartOwner ?? '',
-    totalCartPrice: totalCartPrice ?? 0,
+    cartOwner: cartOwner ,
+    totalCartPrice: totalCartPrice ,
     products:   products.map((e) => e.toEntity()).toList(),
   );
 }

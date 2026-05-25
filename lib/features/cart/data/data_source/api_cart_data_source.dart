@@ -15,6 +15,62 @@ class ApiCartDataSource extends CartDataSource {
   ApiCartDataSource(this.apiManager, this.logger);
 
   @override
+  Future<CartResponseModel> getCartData() async {
+    try {
+      final response = await apiManager.getData(
+        endPoint: Constants.cartEndPoint,
+      );
+
+      return CartResponseModel.fromJson(response.data);
+    } catch (e,stack) {
+      print('$stack');
+      logger.f("  error is  $e, stackTrace: ${StackTrace.current}");
+      if (e is DioException) {
+        throw handleDioError(e);
+      }
+      throw ServerException("Failed to get Cart Data");
+    }
+  }
+
+  // cart /
+  @override
+  Future<CartResponseModel> updateCartItemQuantity(
+    int count,
+    String productId,
+  ) async {
+    try {
+      final response = await apiManager.putData(
+        body: {"count": count},
+        endPoint: "${Constants.cartEndPoint}/$productId",
+      );
+      return CartResponseModel.fromJson(response.data);
+    } catch (e) {
+      logger.f(" 🧨 error is  $e, stackTrace: ${StackTrace.current}");
+      if (e is DioException) {
+        throw handleDioError(e);
+      }
+      throw ServerException("Failed to update Cart ");
+    }
+  }
+
+  @override
+  Future<void> addProductToCart(String productId) async {
+    try {
+     await apiManager.postData(
+        body: {"productId": productId},
+        endPoint: Constants.cartEndPoint,
+      );
+     
+    } catch (e) {
+      logger.f(" 🧨 error is  $e, stackTrace: ${StackTrace.current}");
+      if (e is DioException) {
+        throw handleDioError(e);
+      }
+      throw ServerException("Failed to add Product to Cart ");
+    }
+  }
+
+  @override
   Future<CartResponseModel> clearCart() async {
     try {
       final response = await apiManager.deleteData(
@@ -43,59 +99,6 @@ class ApiCartDataSource extends CartDataSource {
         throw handleDioError(e);
       }
       throw ServerException("Failed to delete this item");
-    }
-  }
-
-  @override
-  Future<CartResponseModel> getCartData() async {
-    try {
-      final response = await apiManager.getData(
-        endPoint: Constants.cartEndPoint,
-      );
-      return CartResponseModel.fromJson(response.data);
-    } catch (e) {
-      logger.f(" 🧨 error is  $e, stackTrace: ${StackTrace.current}");
-      if (e is DioException) {
-        throw handleDioError(e);
-      }
-      throw ServerException(e.toString());
-    }
-  }
-
-  @override
-  Future<CartResponseModel> updateCartItemQuantity(
-    int count,
-    String productId,
-  ) async {
-    try {
-      final response = await apiManager.putData(
-        body: {"count": count},
-        endPoint: "${Constants.cartEndPoint}/$productId",
-      );
-      return CartResponseModel.fromJson(response.data);
-    } catch (e) {
-      logger.f(" 🧨 error is  $e, stackTrace: ${StackTrace.current}");
-      if (e is DioException) {
-        throw handleDioError(e);
-      }
-      throw ServerException("Failed to update Cart ");
-    }
-  }
-
-  @override
-  Future<CartResponseModel> addProductToCart(String productId) async {
-    try {
-      final response = await apiManager.postData(
-        body: {"productId": productId},
-        endPoint: Constants.cartEndPoint,
-      );
-      return CartResponseModel.fromJson(response.data);
-    } catch (e) {
-      logger.f(" 🧨 error is  $e, stackTrace: ${StackTrace.current}");
-      if (e is DioException) {
-        throw handleDioError(e);
-      }
-      throw ServerException("Failed to add Product to Cart ");
     }
   }
 }

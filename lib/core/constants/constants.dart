@@ -6,11 +6,11 @@ class Constants {
   static const String productEndPoint = '/api/v1/products';
   static const String cartEndPoint = '/api/v1/cart';
 }
-
 // apply meduim level caching
 // apply meduim level pagination
 // auth
-//  cart (get/post/delete)
+// switch prodducts 
+// cart (get/post/delete)
 // add to favorite (get/post/delete)
 // payment with paymob
 // local notification

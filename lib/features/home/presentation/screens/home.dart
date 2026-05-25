@@ -8,7 +8,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
 
 class Home extends StatefulWidget {
-  Home({super.key});
+  const Home({super.key});
 
   @override
   State<Home> createState() => _HomeState();
@@ -18,25 +18,39 @@ class _HomeState extends State<Home> {
   int index = 0;
 
   final List<Widget> tabs = [
-    Hometab(),
-    CartScreen(),
-    FavouriteScreen(),
-    ProfileScreen(),
+  const  Hometab(),
+  const CartScreen(),
+  const  FavouriteScreen(),
+  const  ProfileScreen(),
   ];
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return  Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
         toolbarHeight: 65.h,
         automaticallyImplyLeading: false,
         backgroundColor: Colors.white,
-        // appBar
-        title: Text(
-          "Discover",
-          style: getBoldStyle(fontSize: 27.sp, color: Colors.black),
-        ),
+        // AppBar
+        title: index == 1
+            ? Center(
+                child: Text(
+                  "My Cart",
+                  style: getSemiBoldStyle(fontSize: 20.sp, color: Colors.black),
+                ),
+              )
+            : index == 0
+            ? Text(
+                "Discover",
+                style: getBoldStyle(fontSize: 27.sp, color: Colors.black),
+              )
+            : Center(
+                child: Text(
+                  "Saved  items",
+                  style: getSemiBoldStyle(fontSize: 20.sp, color: Colors.black),
+                ),
+              ),
       ),
 
       // Body

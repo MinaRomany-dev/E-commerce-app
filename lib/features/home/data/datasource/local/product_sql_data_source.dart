@@ -1,7 +1,7 @@
 import 'package:ecommerce2/core/caching/database_sql.dart';
 import 'package:ecommerce2/core/error/exceptions.dart';
 import 'package:ecommerce2/features/home/data/datasource/local/product_local_data_source.dart';
-import 'package:ecommerce2/features/home/data/models/product_model.dart';
+import 'package:ecommerce2/core/models/product_model.dart';
 import 'package:injectable/injectable.dart';
 
 @LazySingleton(as: ProductLocalDataSource)

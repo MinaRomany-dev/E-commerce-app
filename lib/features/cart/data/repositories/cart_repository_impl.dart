@@ -15,13 +15,13 @@ class CartRepositoryImpl implements CartRepository {
   final CartDataSource cartDataSource;
   CartRepositoryImpl(this.cartDataSource);
   @override
-  Future<Either<AppFailure, CartResponseEntity>> addProductToCart(
+  Future<Either<AppFailure, void>> addProductToCart(
     String productId,
   ) async {
     try {
-      final result = await cartDataSource.addProductToCart(productId);
+       await cartDataSource.addProductToCart(productId);
 
-      return Right(result.toEntity());
+      return Right(null);
     } on AppExceptions catch (e) {
       return Left(mapExceptionToFailure(e));
     }
@@ -39,38 +39,38 @@ class CartRepositoryImpl implements CartRepository {
   }
 
   @override
-  Future<Either<AppFailure, CartResponseEntity>> removeProductFromCart(
+  Future<Either<AppFailure, CartDataEntity>> removeProductFromCart(
     String productId,
   )async {
      try {
       final result = await cartDataSource.removeCartItem(productId);
 
-      return Right(result.toEntity());
+      return Right(result.cartdata.toEntity());
     } on AppExceptions catch (e) {
       return Left(mapExceptionToFailure(e));
     }
   }
 
   @override
-  Future<Either<AppFailure, CartResponseEntity>> clearCart() async{
+  Future<Either<AppFailure, CartDataEntity>> clearCart() async{
     try {
       final result = await cartDataSource.clearCart();
 
-      return Right(result.toEntity());
+      return Right(result.cartdata.toEntity());
     } on AppExceptions catch (e) {
       return Left(mapExceptionToFailure(e));
     }
   }
 
   @override
-  Future<Either<AppFailure, CartResponseEntity>> updateCartItemQuantity(
+  Future<Either<AppFailure, CartDataEntity>> updateCartItemQuantity(
     int count,
     String productId,
   ) async{
      try {
       final result = await cartDataSource.updateCartItemQuantity(count ,productId);
 
-      return Right(result.toEntity());
+      return Right(result.cartdata.toEntity());
     } on AppExceptions catch (e) {
       return Left(mapExceptionToFailure(e));
     }

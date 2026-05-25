@@ -1,28 +1,28 @@
 import 'package:ecommerce2/core/error/exceptions.dart';
-import 'package:ecommerce2/features/home/data/models/product_model.dart';
+import 'package:ecommerce2/core/models/product_model.dart';
 
 class CartProductModel {
-  final int? count;
+  final int count;
   final String id;
   final ProductModel product;
-  final int? price;
+  final int price;
 
   CartProductModel({
-    this.count,
+   required this.count,
     required this.id,
     required this.product,
-    this.price,
+   required this.price,
   });
 
   factory CartProductModel.fromJson(Map<String, dynamic> json) {
     return CartProductModel(
-      count: json['count'],
+      count: json['count'] ?? 0,
       id: json['_id'],
       product: ProductModel.fromJson(
         json['product'] ?? (throw ServerException("Product is null")),
       ),
 
-      price: json['price'],
+      price: json['price'] ?? 0,
     );
   }
 

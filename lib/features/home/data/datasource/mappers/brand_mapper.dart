@@ -1,4 +1,4 @@
-import 'package:ecommerce2/features/home/data/models/brand_model.dart';
+import 'package:ecommerce2/core/models/brand_model.dart';
 import 'package:ecommerce2/features/home/domain/entities/brand_entity.dart';
 
 extension BrandMapper on BrandModel {

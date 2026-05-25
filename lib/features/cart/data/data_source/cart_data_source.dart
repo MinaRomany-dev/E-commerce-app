@@ -1,4 +1,5 @@
 import 'package:ecommerce2/features/cart/data/models/cart_response.dart';
+import 'package:flutter/material.dart';
 
 abstract class CartDataSource {
   Future<CartResponseModel> getCartData();
@@ -9,5 +10,5 @@ abstract class CartDataSource {
 
   Future<CartResponseModel> clearCart();
 
-  Future<CartResponseModel> addProductToCart(String productId);
+  Future<void> addProductToCart(String productId);
 }

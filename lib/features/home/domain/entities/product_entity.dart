@@ -16,8 +16,10 @@ class ProductEntity {
   final BrandEntity brand;
   final int? sold;
   final int? ratingsQuantity;
+  bool isfavorite;
 
- const ProductEntity({
+  ProductEntity({
+    this.isfavorite = false,
     required this.id,
     required this.title,
     required this.slug,
@@ -40,7 +42,7 @@ class ProductEntity {
     slug: '',
     description: '',
     quantity: 0,
-    price: 0,
+    price: 1,
     imageCover: '',
     images: [],
     ratingsAverage: 0.0,

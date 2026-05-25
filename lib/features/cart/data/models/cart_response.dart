@@ -1,18 +1,19 @@
+import 'package:ecommerce2/core/error/exceptions.dart';
 import 'package:ecommerce2/features/cart/data/models/cart_data_model.dart';
 
 class CartResponseModel {
-  final String? status;
+  final String status;
   final String? message;
-  final int? numOfCartItems;
+  final int numOfCartItems;
   final String cartId;
   final CartDataModel cartdata;
 
   CartResponseModel({
-    this.status,
-    this.message,
-    this.numOfCartItems,
-   required this.cartId,
-  required  this.cartdata,
+    required this.status,
+    required this.message,
+    required this.numOfCartItems,
+    required this.cartId,
+    required this.cartdata,
   });
 
   factory CartResponseModel.fromJson(Map<String, dynamic> json) {
@@ -20,10 +21,10 @@ class CartResponseModel {
       status: json['status'] ?? 'error',
       message: json['message'] ?? 'error',
       numOfCartItems: json['numOfCartItems'] ?? 0,
-      cartId: json['cartId'],
+      cartId: json['cartId'] ?? '',
       cartdata: json['data'] != null
           ? CartDataModel.fromJson(json['data'])
-          : throw Exception('Cart data is  null'),
+          : throw ServerException("Cart data is null"),
     );
   }
 
@@ -37,6 +38,3 @@ class CartResponseModel {
     };
   }
 }
- 
-
-

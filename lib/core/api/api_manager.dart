@@ -37,7 +37,7 @@ class ApiManager {
               options.headers["token"] = _cachedToken;
 
               print(
-                "✅ Token Added from cache: ${_cachedToken!.substring(0, 30)}...",
+                " ✅ Token Added from cache: ${_cachedToken!.substring(0, 30)}...",
               );
             } else {
               print("❌ No token in cache!");
@@ -51,6 +51,7 @@ class ApiManager {
 
     dio.interceptors.add(
       PrettyDioLogger(
+        
         responseBody: true,
         request: true,
         requestHeader: true,
@@ -122,15 +123,5 @@ class ApiManager {
       queryParameters: queryParameters,
       options: (options ?? Options()).copyWith(headers: headers),
     );
-  }
-
-  // ←←← أضف الدالتين دول
-  void updateToken(String newToken) {
-    _cachedToken = newToken;
-    print("🔄 Token updated in ApiManager cache");
-  }
-
-  void clearToken() {
-    _cachedToken = null;
   }
 }

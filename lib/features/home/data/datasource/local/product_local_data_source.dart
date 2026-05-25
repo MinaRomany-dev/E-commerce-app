@@ -1,4 +1,4 @@
-import 'package:ecommerce2/features/home/data/models/product_model.dart';
+import 'package:ecommerce2/core/models/product_model.dart';
 
 abstract class ProductLocalDataSource {
   Future<List<ProductModel>> getCacheProducts();

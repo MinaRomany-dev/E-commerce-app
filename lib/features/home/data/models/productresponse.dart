@@ -1,4 +1,4 @@
-import 'product_model.dart';
+import '../../../../core/models/product_model.dart';
 import 'metadata.dart';
 
 class ProductResponse {

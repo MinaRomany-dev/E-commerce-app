@@ -25,8 +25,24 @@ class CartError extends CartState {
  const CartError(this.message);
 }
 
-class CartOperationSuccess extends CartState {
+class CartAddedSuccess extends CartState {
   final String message;
 
-  const CartOperationSuccess(this.message);
+  const CartAddedSuccess(this.message);
 }
+
+
+
+sealed class CounterState {
+final int count ;
+final String message;
+const CounterState( this.count ,this.message );
+}
+
+class CounterInitial extends CounterState {
+  const CounterInitial(int mm) : super( mm,"" );
+  
+}
+
+
+

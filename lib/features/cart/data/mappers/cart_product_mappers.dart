@@ -5,8 +5,8 @@ import 'package:ecommerce2/features/home/data/datasource/mappers/product_mapper.
 extension CartProductMappers on CartProductModel {
   CartProductEntity toEntity() => CartProductEntity(
     id: id,
-    count: count ?? 0,
-    price: price ?? 0,
+    count: count ,
+    price: price ,
     product: product.toEntity() ,
   );
 }
