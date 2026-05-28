@@ -34,6 +34,10 @@ class $AssetsImagesGen {
   AssetGenImage get group16 =>
       const AssetGenImage('assets/images/Group_16.png');
 
+  /// File path: assets/images/Heart-duotone.png
+  AssetGenImage get heartDuotone =>
+      const AssetGenImage('assets/images/Heart-duotone.png');
+
   /// File path: assets/images/Rectangle 12.jpg
   AssetGenImage get rectangle12Jpg =>
       const AssetGenImage('assets/images/Rectangle 12.jpg');
@@ -91,6 +95,7 @@ class $AssetsImagesGen {
     group33,
     group34,
     group16,
+    heartDuotone,
     rectangle12Jpg,
     rectangle12Png,
     rectangle11Jpg,

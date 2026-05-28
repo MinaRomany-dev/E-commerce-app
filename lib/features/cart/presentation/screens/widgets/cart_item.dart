@@ -67,10 +67,10 @@ class CartItemWidget extends StatelessWidget {
                 SizedBox(height: 8.h),
                 Text(
                   "\$ ${item.price}",
-                  style:  TextStyle(
+                  style: TextStyle(
                     color: Colors.green,
                     fontWeight: FontWeight.w600,
-                    fontSize: 14.sp, 
+                    fontSize: 14.sp,
                   ),
                 ),
                 SizedBox(height: 8.h),

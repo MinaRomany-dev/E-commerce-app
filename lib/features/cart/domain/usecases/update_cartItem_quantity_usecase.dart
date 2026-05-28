@@ -13,6 +13,5 @@ class UpdateCartitemQuantityUsecase {
   Future<Either<AppFailure, CartDataEntity>> call(
     int count,
     String productId,
-  ) async 
-      => await cartRepository.updateCartItemQuantity(count, productId);
+  ) async => await cartRepository.updateCartItemQuantity(count, productId);
 }

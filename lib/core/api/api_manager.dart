@@ -51,7 +51,6 @@ class ApiManager {
 
     dio.interceptors.add(
       PrettyDioLogger(
-        
         responseBody: true,
         request: true,
         requestHeader: true,

@@ -2,7 +2,7 @@ import 'package:ecommerce2/core/resources/styles_manager.dart';
 import 'package:ecommerce2/core/utils/toast.dart';
 import 'package:ecommerce2/features/cart/presentation/cubit/cart_cubit.dart';
 import 'package:ecommerce2/features/home/domain/entities/product_entity.dart';
-import 'package:ecommerce2/features/product_deatils/presentation/widgets/image_product_details.dart';
+import 'package:ecommerce2/features/home/presentation/screens/widgets/carousal_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -23,8 +23,8 @@ class DetailsProduct extends StatelessWidget {
         if (state is CartAddedSuccess) {
           AppToast.showToast(
             context: context,
-            title: "Product added successfully",
-            description: "",
+            title: "Success",
+            description: "Product Added to Your Cart",
             type: ToastificationType.success,
           );
         }
@@ -51,14 +51,16 @@ class DetailsProduct extends StatelessWidget {
 
         body: SafeArea(
           child: SingleChildScrollView(
-            padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 12.h),
+            padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 12.h),
 
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 /// PRODUCT IMAGES
-                ImageProductDetails(product: product),
-                SizedBox(height: 20.h),
+                Carousalslider(
+                  images: product.images.map((e) => e.toString()).toList(),
+                ),
+                SizedBox(height: 5.h),
 
                 /// TITLE
                 Text(

@@ -18,7 +18,7 @@ class AuthRepositoryImpl implements AuthRepository {
   RemoteauthDatasource remoteauthDatasouce;
 
   AuthRepositoryImpl(this.localauthDatasouce, this.remoteauthDatasouce);
-@override
+  @override
   Future<Either<AppFailure, User>> login(Signinrequest request) async {
     try {
       final response = await remoteauthDatasouce.login(request);
@@ -30,7 +30,8 @@ class AuthRepositoryImpl implements AuthRepository {
       return Left(mapExceptionToFailure(e));
     }
   }
-@override
+
+  @override
   Future<Either<AppFailure, User>> register(Signuprequest request) async {
     try {
       final response = await remoteauthDatasouce.register(request);

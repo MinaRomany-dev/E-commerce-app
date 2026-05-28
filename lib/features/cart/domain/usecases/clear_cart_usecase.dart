@@ -10,7 +10,6 @@ class ClearCartUsecase {
 
   const ClearCartUsecase(this.cartRepository);
 
-
   Future<Either<AppFailure, CartDataEntity>> call() async =>
       await cartRepository.clearCart();
 }

@@ -16,7 +16,7 @@ class ProductResponse {
           : Metadata.fromJson(json['metadata'] as Map<String, dynamic>),
       products:
           (json['data'] as List<dynamic>?)
-              ?.map((e) => ProductModel.fromJson(e as Map<String, dynamic>  ))
+              ?.map((e) => ProductModel.fromJson(e as Map<String, dynamic>))
               .toList() ??
           [],
     );

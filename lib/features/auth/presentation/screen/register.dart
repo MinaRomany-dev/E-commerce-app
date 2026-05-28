@@ -1,3 +1,4 @@
+import 'package:ecommerce2/core/resources/styles_manager.dart';
 import 'package:ecommerce2/core/validator/validator.dart';
 import 'package:ecommerce2/core/widgets/customtxtfield.dart';
 import 'package:ecommerce2/features/auth/data/models/signup/signup_request.dart';
@@ -10,8 +11,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 class Register extends StatefulWidget {
   static const String routename = "/register";
 
-
-  Register({super.key});
+  const Register({super.key});
 
   @override
   State<Register> createState() => _RegisterState();
@@ -19,18 +19,20 @@ class Register extends StatefulWidget {
 
 class _RegisterState extends State<Register> {
   final TextEditingController usernameController = TextEditingController();
-
   final TextEditingController emailController = TextEditingController();
-
+  final TextEditingController phoneController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
+
   final _formkey = GlobalKey<FormState>();
- @override
+
+  @override
   void dispose() {
     usernameController.dispose();
     emailController.dispose();
+    phoneController.dispose();
     passwordController.dispose();
     super.dispose();
- }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -39,139 +41,193 @@ class _RegisterState extends State<Register> {
 
       body: SafeArea(
         child: SingleChildScrollView(
-          padding:  EdgeInsets.symmetric(horizontal: 30.w, vertical: 20.h),
-          child: Form(
-            key: _formkey,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                 SizedBox(height: 40.h),
-                 Text(
-                  "Let’s Get Started!",
-                  style: TextStyle(
-                    fontSize: 25.sp,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.black87,
-                  ),
+          physics: const BouncingScrollPhysics(),
+          padding: EdgeInsets.symmetric(horizontal: 20.w),
+
+          child: Column(
+            children: [
+              SizedBox(height: 20.h),
+
+              // HEADER
+              Container(
+                width: double.infinity,
+                padding: EdgeInsets.symmetric(vertical: 32.h),
+                decoration: BoxDecoration(
+                  color: Colors.black,
+                  borderRadius: BorderRadius.circular(26.r),
                 ),
-                 SizedBox(height: 7.h),
-                Text(
-                  "Create an account on MNZL to get all features",
-                  style: TextStyle(fontSize: 16, color: Colors.grey[700]),
-                ),
-                 SizedBox(height: 45.h),
-            
-                // Username
-                CustomTextField(
-                  validator: Validators.username,
-                  controller: usernameController,
-                  hintText: 'User Name',
-                  icon: Icons.person_outline,
-                ),
-                 SizedBox(height: 25.h),
-            
-                // Email
-                CustomTextField(
-                  validator: Validators.email,
-                  controller: emailController,
-                  hintText: 'Email',
-                  icon: Icons.email_outlined,
-                  keyboardType: TextInputType.emailAddress,
-                ),
-                 SizedBox(height: 25.h),
-            
-                // Password
-                CustomTextField(
-                  keyboardType: TextInputType.visiblePassword,
-                  validator: Validators.password,
-                  controller: passwordController,
-                  hintText: 'Password',
-                  icon: Icons.lock_outline,
-                  obscureText: true,
-                  suffixIcon: const Icon(Icons.visibility_off),
-                ),
-                 SizedBox(height: 40.h),
-            
-                // Create Button
-                Container(
-                  width: double.infinity,
-                  height: 55,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(15.r),
-                    gradient: const LinearGradient(
-                      colors: [Color(0xFF8EDDFF), Color(0xFF769DAD)],
-                      begin: Alignment.topLeft,
-                      end: Alignment.bottomRight,
+                child: Column(
+                  children: [
+                    Icon(
+                      Icons.person_add_alt_1_rounded,
+                      color: Colors.white,
+                      size: 50.sp,
                     ),
-                    boxShadow: [
-                      BoxShadow(
-                        color: Colors.grey.withOpacity(0.4),
-                        spreadRadius: 2,
-                        blurRadius: 8,
-                        offset: const Offset(0, 4),
+                    SizedBox(height: 12.h),
+                    Text(
+                      "Create Account",
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 28.sp,
+                        fontWeight: FontWeight.bold,
                       ),
-                    ],
-                  ),
-                  child: Material(
-                    color: Colors.transparent,
-                    child: InkWell(
-                      borderRadius: BorderRadius.circular(15.r),
-                      onTap: ()async {
+                    ),
+                    SizedBox(height: 6.h),
+                    Text(
+                      "Join us and start shopping",
+                      style: TextStyle(
+                        color: Colors.grey.shade300,
+                        fontSize: 14.sp,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+
+              SizedBox(height: 30.h),
+
+              // FORM
+              Form(
+                key: _formkey,
+                child: Column(
+                  children: [
+                    // USERNAME
+                    Mytextfield(
+                      controller: usernameController,
+                      validator: Validators.username,
+                      hintText: "Username",
+                      isPassword: false,
+                      prefixIcon: Icon(
+                        Icons.person_outline,
+                        color: Colors.grey,
+                      ),
+                    ),
+
+                    SizedBox(height: 18.h),
+
+                    // EMAIL
+                    Mytextfield(
+                      controller: emailController,
+                      validator: Validators.email,
+                      hintText: "Email",
+                      isPassword: false,
+                      keyboardType: TextInputType.emailAddress,
+                      prefixIcon: Icon(
+                        Icons.email_outlined,
+                        color: Colors.grey,
+                      ),
+                    ),
+
+                    SizedBox(height: 18.h),
+
+                    // PHONE
+                    Mytextfield(
+                      controller: phoneController,
+                      hintText: "Phone Number",
+                      isPassword: false,
+                      keyboardType: TextInputType.phone,
+                      validator: (value) {
+                        if (value == null || value.isEmpty) {
+                          return "Phone is required";
+                        }
+                        if (value.length < 11) {
+                          return "Invalid phone number";
+                        }
+                        return null;
+                      },
+                      prefixIcon: Icon(
+                        Icons.phone_outlined,
+                        color: Colors.grey,
+                      ),
+                    ),
+
+                    SizedBox(height: 18.h),
+
+                    // PASSWORD
+                    Mytextfield(
+                      controller: passwordController,
+                      validator: Validators.password,
+                      hintText: "Password",
+                      isPassword: true,
+                      obscureText: true,
+                      prefixIcon: Icon(Icons.lock_outline, color: Colors.grey),
+                      suffixIcon: Icon(
+                        Icons.visibility_off_outlined,
+                        color: Colors.grey,
+                      ),
+                    ),
+
+                    SizedBox(height: 30.h),
+
+                    // BUTTON
+                    SizedBox(
+                      width: double.infinity,
+                      height: 55.h,
+                      child: ElevatedButton(
+                        onPressed: () async {
                           if (_formkey.currentState!.validate()) {
-                     await   context.read<AuthCubit>().register(
-                          Signuprequest(
-                            phone: "01207212392",
-                            name: usernameController.text,
-                            email: emailController.text,
-                            password: passwordController.text,
-                          ),
-                        );
-                        Navigator.of(context).pushNamed(Login.routename);
-                      }},
-                      child: const Center(
-                        child: Text(
-                          "CREATE",
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 18,
-                            fontWeight: FontWeight.bold,
-                            letterSpacing: 1.2,
+                            await context.read<AuthCubit>().register(
+                              Signuprequest(
+                                name: usernameController.text.trim(),
+                                email: emailController.text.trim(),
+                                phone: phoneController.text.trim(),
+                                password: passwordController.text,
+                              ),
+                            );
+
+                            Navigator.of(
+                              context,
+                            ).pushReplacementNamed(Login.routename);
+                          }
+                        },
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: Colors.black,
+                          foregroundColor: Colors.white,
+                          elevation: 0,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(16.r),
                           ),
                         ),
-                      ),
-                    ),
-                  ),
-                ),
-                const SizedBox(height: 40),
-            
-                // Login link
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text(
-                      "Already have an account? ",
-                      style: TextStyle(fontSize: 13.sp, color: Colors.grey[800]),
-                    ),
-                    InkWell(
-                      onTap: () {
-                        Navigator.of(
-                          context,
-                        ).pushReplacementNamed(Login.routename);
-                      },
-                      child:  Text(
-                        "Login here",
-                        style: TextStyle(
-                          fontSize: 15.sp,
-                          fontWeight: FontWeight.bold,
-                          color: Color(0xFF769DAD),
+                        child: Text(
+                          "Create Account",
+                          style: TextStyle(
+                            fontSize: 16.sp,
+                            fontWeight: FontWeight.bold,
+                          ),
                         ),
                       ),
                     ),
                   ],
                 ),
-                const SizedBox(height: 20),
-              ],
-            ),
+              ),
+
+              SizedBox(height: 25.h),
+
+              // LOGIN
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    "Already have account?",
+                    style: TextStyle(color: Colors.grey.shade700),
+                  ),
+                  SizedBox(width: 6.w),
+                  InkWell(
+                    onTap: () {
+                      Navigator.of(
+                        context,
+                      ).pushReplacementNamed(Login.routename);
+                    },
+                    child: Text(
+                      "Login",
+                      style: getBoldStyle(fontSize: 15.sp, color: Colors.black),
+                    ),
+                  ),
+                ],
+              ),
+
+              //  SizedBox(height: 20.h),
+            ],
           ),
         ),
       ),

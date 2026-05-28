@@ -7,7 +7,7 @@ import 'package:injectable/injectable.dart';
 class AddProductTocartUsecase {
   final CartRepository cartRepository;
   const AddProductTocartUsecase(this.cartRepository);
-  
-  Future<Either<AppFailure, void>> call(String productId) =>  cartRepository.addProductToCart(productId);
- 
+
+  Future<Either<AppFailure, void>> call(String productId) =>
+      cartRepository.addProductToCart(productId);
 }

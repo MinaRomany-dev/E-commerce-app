@@ -1,6 +1,8 @@
-import 'package:ecommerce2/core/resources/styles_manager.dart';
+import 'package:ecommerce2/core/routes/routes.dart';
 import 'package:ecommerce2/features/cart/presentation/cubit/cart_cubit.dart';
 import 'package:ecommerce2/features/cart/presentation/screens/widgets/cart_item.dart';
+import 'package:ecommerce2/features/cart/presentation/screens/widgets/default_cart_screens.dart';
+import 'package:ecommerce2/features/cart/presentation/screens/widgets/shimmer_cart_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -47,18 +49,12 @@ class _CartScreenState extends State<CartScreen> {
         if (state is CartError) {
           return Center(child: Text(state.message));
         } else if (state is CartLoading) {
-          return const Center(child: CircularProgressIndicator());
-        } else  if (state is CartLoaded) {
-          
+          return const CartShimmer();
+        } else if (state is CartLoaded) {
           final cart = state.cartdata;
           final cartItems = cart.products;
           if (cartItems.isEmpty) {
-            return Center(
-              child: Text(
-                'Cart is empty',
-                style: getMediumStyle(color: Colors.black, fontSize: 18.sp),
-              ),
-            );
+            return EmptyCartScreen();
           }
           return Column(
             children: [
@@ -70,7 +66,6 @@ class _CartScreenState extends State<CartScreen> {
                   itemBuilder: (context, index) {
                     final item = cartItems[index];
                     return CartItemWidget(
-
                       key: ValueKey(item.product.id),
                       onDecrement: () async {
                         await context.read<CartCubit>().updateQuantity(
@@ -134,7 +129,9 @@ class _CartScreenState extends State<CartScreen> {
                             borderRadius: BorderRadius.circular(16),
                           ),
                         ),
-                        onPressed: () {},
+                        onPressed: () {
+                          Navigator.pushNamed(context, Routes.checkout);
+                        },
                         child: const Text(
                           "Checkout",
                           style: TextStyle(
@@ -150,7 +147,7 @@ class _CartScreenState extends State<CartScreen> {
               ),
             ],
           );
-        }else {
+        } else {
           return const Center(child: Text('Something went wrong'));
         }
       },

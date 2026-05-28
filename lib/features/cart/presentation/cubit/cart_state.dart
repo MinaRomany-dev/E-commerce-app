@@ -14,15 +14,15 @@ class CartLoading extends CartState {
 }
 
 class CartLoaded extends CartState {
-  final CartDataEntity cartdata; 
-  
- const CartLoaded({required this.cartdata});
+  final CartDataEntity cartdata;
+
+  const CartLoaded({required this.cartdata});
 }
 
 class CartError extends CartState {
   final String message;
 
- const CartError(this.message);
+  const CartError(this.message);
 }
 
 class CartAddedSuccess extends CartState {
@@ -31,18 +31,12 @@ class CartAddedSuccess extends CartState {
   const CartAddedSuccess(this.message);
 }
 
-
-
 sealed class CounterState {
-final int count ;
-final String message;
-const CounterState( this.count ,this.message );
+  final int count;
+  final String message;
+  const CounterState(this.count, this.message);
 }
 
 class CounterInitial extends CounterState {
-  const CounterInitial(int mm) : super( mm,"" );
-  
+  const CounterInitial(int mm) : super(mm, "");
 }
-
-
-

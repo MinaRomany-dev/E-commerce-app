@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-class CustomTextField extends StatelessWidget {
+class Mytextfield extends StatelessWidget {
   // required
   final TextEditingController controller;
   final String hintText;
@@ -15,7 +15,7 @@ class CustomTextField extends StatelessWidget {
   final bool? enabled;
   final Color? backgroundColor;
 
-  const CustomTextField({
+  const Mytextfield({
     super.key,
     required this.controller,
     required this.hintText,
@@ -28,6 +28,8 @@ class CustomTextField extends StatelessWidget {
     this.maxLines,
     this.enabled,
     this.backgroundColor,
+    required Icon prefixIcon,
+    required bool isPassword,
   });
 
   @override

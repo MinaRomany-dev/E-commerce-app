@@ -10,17 +10,16 @@ abstract class AppToast {
     required ToastificationType type,
   }) {
     toastification.show(
-
       context: context,
-     alignment: Alignment.bottomLeft,
+      alignment: Alignment.bottomLeft,
       type: type,
       title: Text(
         title,
-        style:  TextStyle(fontSize: 16.sp, fontWeight: FontWeight.bold),
+        style: TextStyle(fontSize: 16.sp, fontWeight: FontWeight.bold),
       ),
       description: Text(
         description,
-        style:  TextStyle(fontSize: 14.sp, fontWeight: FontWeight.w400),
+        style: TextStyle(fontSize: 14.sp, fontWeight: FontWeight.w400),
       ),
       primaryColor: Colors.white,
       autoCloseDuration: const Duration(seconds: 2),

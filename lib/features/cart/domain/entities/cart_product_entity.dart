@@ -7,9 +7,9 @@ class CartProductEntity {
   final int price;
 
   const CartProductEntity({
- required   this.count,
+    required this.count,
     required this.id,
     required this.product,
-  required  this.price,
+    required this.price,
   });
 }

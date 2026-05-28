@@ -1,14 +1,15 @@
 import 'dart:convert';
 import 'package:ecommerce2/core/models/category_model.dart';
+
 class ProductCachedModel {
   String id;
   String title;
   String description;
   int price;
-   String imageCover;
+  String imageCover;
   List<dynamic> images;
   int ratingsQuantity;
-    double ratingsAverage;
+  double ratingsAverage;
 
   CategoryModel category;
   int? priceAfterDiscount;
@@ -25,8 +26,7 @@ class ProductCachedModel {
     this.priceAfterDiscount,
   });
 
-
-    Map<String, dynamic> toMap() {
+  Map<String, dynamic> toMap() {
     return {
       'id': id,
       'title': title,
@@ -43,7 +43,6 @@ class ProductCachedModel {
 
   factory ProductCachedModel.fromMap(Map<String, dynamic> map) {
     return ProductCachedModel(
-
       id: map['id'],
       title: map['title'],
       description: map['description'],

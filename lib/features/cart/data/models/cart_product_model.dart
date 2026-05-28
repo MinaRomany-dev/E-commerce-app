@@ -8,10 +8,10 @@ class CartProductModel {
   final int price;
 
   CartProductModel({
-   required this.count,
+    required this.count,
     required this.id,
     required this.product,
-   required this.price,
+    required this.price,
   });
 
   factory CartProductModel.fromJson(Map<String, dynamic> json) {

@@ -1,8 +1,7 @@
 import 'dart:convert';
-
 import 'brand_model.dart';
 import 'category_model.dart';
-import '../../features/home/data/models/subcategory.dart';
+import 'subcategory.dart';
 
 class ProductModel {
   int? sold;
@@ -23,7 +22,7 @@ class ProductModel {
   DateTime? updatedAt;
   int? priceAfterDiscount;
   List<dynamic>? availableColors;
-  bool isfavorite ;
+  bool isfavorite;
 
   ProductModel({
     this.sold,
@@ -42,7 +41,7 @@ class ProductModel {
     this.ratingsAverage,
     this.createdAt,
     this.updatedAt,
-    this.isfavorite =false,
+    this.isfavorite = false,
     this.priceAfterDiscount,
     this.availableColors,
   });

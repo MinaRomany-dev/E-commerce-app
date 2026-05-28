@@ -9,7 +9,7 @@ AppExceptions handleDioError(DioException e) {
     case DioExceptionType.sendTimeout:
     case DioExceptionType.cancel:
       return NetworkException("Please check your  connection ");
-      
+
     case DioExceptionType.badResponse:
       final statuscode = e.response?.statusCode;
       final msg = e.response?.data["message"];

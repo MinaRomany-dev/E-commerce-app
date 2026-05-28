@@ -9,7 +9,6 @@ class GetCartproductsUsecase {
   final CartRepository cartRepository;
   const GetCartproductsUsecase(this.cartRepository);
 
-  Future<Either<AppFailure, CartDataEntity>> call() async=>
-     await cartRepository.getCartProducts();
-  }
-
+  Future<Either<AppFailure, CartDataEntity>> call() async =>
+      await cartRepository.getCartProducts();
+}

@@ -9,7 +9,7 @@ class CartDataEntity {
   const CartDataEntity({
     required this.id,
     required this.products,
-   required this.cartOwner,
-   required this.totalCartPrice,
+    required this.cartOwner,
+    required this.totalCartPrice,
   });
 }

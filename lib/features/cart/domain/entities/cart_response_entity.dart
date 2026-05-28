@@ -4,10 +4,10 @@ class CartResponseEntity {
   final int numOfCartItems;
   final String cartId;
   final CartDataEntity cartdata;
-  
+
   const CartResponseEntity({
     required this.cartdata,
-   required this.numOfCartItems,
+    required this.numOfCartItems,
     required this.cartId,
   });
 }

@@ -5,7 +5,7 @@ import 'package:ecommerce2/features/cart/domain/entities/cart_response_entity.da
 extension CartResponseMapper on CartResponseModel {
   CartResponseEntity toEntity() => CartResponseEntity(
     cartId: cartId,
-    cartdata: cartdata.toEntity() ,
+    cartdata: cartdata.toEntity(),
     numOfCartItems: numOfCartItems,
   );
 }

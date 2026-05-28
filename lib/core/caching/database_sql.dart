@@ -11,9 +11,9 @@ class DatabaseHelper {
 
     _database = await _initDb();
 
-// complete cycle payment by paymob 
-// apply meduim level caching by sqflite
-// apply meduim level pagination 
+    // complete cycle payment by paymob
+    // apply meduim level caching by sqflite
+    // apply meduim level pagination
 
     return _database!;
   }

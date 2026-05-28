@@ -22,7 +22,7 @@ class ApiCartDataSource extends CartDataSource {
       );
 
       return CartResponseModel.fromJson(response.data);
-    } catch (e,stack) {
+    } catch (e, stack) {
       print('$stack');
       logger.f("  error is  $e, stackTrace: ${StackTrace.current}");
       if (e is DioException) {
@@ -56,11 +56,10 @@ class ApiCartDataSource extends CartDataSource {
   @override
   Future<void> addProductToCart(String productId) async {
     try {
-     await apiManager.postData(
+      await apiManager.postData(
         body: {"productId": productId},
         endPoint: Constants.cartEndPoint,
       );
-     
     } catch (e) {
       logger.f(" 🧨 error is  $e, stackTrace: ${StackTrace.current}");
       if (e is DioException) {

@@ -48,6 +48,22 @@ import 'package:ecommerce2/features/cart/domain/usecases/update_cartItem_quantit
     as _i542;
 import 'package:ecommerce2/features/cart/presentation/cubit/cart_cubit.dart'
     as _i781;
+import 'package:ecommerce2/features/favourite/data/datasource/api_favo_data_source.dart'
+    as _i180;
+import 'package:ecommerce2/features/favourite/data/datasource/favo_data_source.dart'
+    as _i565;
+import 'package:ecommerce2/features/favourite/data/repositories/favourite_repository_impl.dart'
+    as _i1032;
+import 'package:ecommerce2/features/favourite/domain/repo/favourite_repository.dart'
+    as _i693;
+import 'package:ecommerce2/features/favourite/domain/usecases/add_to_favourite_usecase.dart'
+    as _i790;
+import 'package:ecommerce2/features/favourite/domain/usecases/get_favourite_items.dart'
+    as _i940;
+import 'package:ecommerce2/features/favourite/domain/usecases/remove_item_usecase.dart'
+    as _i357;
+import 'package:ecommerce2/features/favourite/presentation/cubit/cubit/favourite_cubit.dart'
+    as _i228;
 import 'package:ecommerce2/features/home/data/datasource/local/product_local_data_source.dart'
     as _i119;
 import 'package:ecommerce2/features/home/data/datasource/local/product_sql_data_source.dart'
@@ -64,6 +80,18 @@ import 'package:ecommerce2/features/home/domain/use_cases/get_product_usecase.da
     as _i878;
 import 'package:ecommerce2/features/home/presentation/cubit/product_cubit.dart'
     as _i587;
+import 'package:ecommerce2/features/payment/data/datasoure/api_payment_datasource.dart'
+    as _i459;
+import 'package:ecommerce2/features/payment/data/datasoure/payment_data_source.dart'
+    as _i845;
+import 'package:ecommerce2/features/payment/data/repositories/checkout_repository_impl.dart'
+    as _i357;
+import 'package:ecommerce2/features/payment/domain/repo/checkout_repository.dart'
+    as _i746;
+import 'package:ecommerce2/features/payment/domain/usecase/do_checkout_usecase.dart'
+    as _i746;
+import 'package:ecommerce2/features/payment/presentation/cubit/checkout_cubit.dart'
+    as _i365;
 import 'package:flutter_secure_storage/flutter_secure_storage.dart' as _i558;
 import 'package:get_it/get_it.dart' as _i174;
 import 'package:injectable/injectable.dart' as _i526;
@@ -91,6 +119,12 @@ extension GetItInjectableX on _i174.GetIt {
     gh.singleton<_i132.ApiManager>(
       () => _i132.ApiManager(gh<_i660.LocalauthDatasouce>()),
     );
+    gh.lazySingleton<_i565.FavoDataSource>(
+      () => _i180.ApiFavoDataSource(gh<_i132.ApiManager>(), gh<_i974.Logger>()),
+    );
+    gh.lazySingleton<_i845.PaymentDataSource>(
+      () => _i459.ApiPaymentDatasource(gh<_i132.ApiManager>()),
+    );
     gh.singleton<_i198.RemoteauthDatasource>(
       () => _i255.ApiDataSource(apimanager: gh<_i132.ApiManager>()),
     );
@@ -102,6 +136,9 @@ extension GetItInjectableX on _i174.GetIt {
     );
     gh.lazySingleton<_i108.RemoteProductDatasource>(
       () => _i92.ProductApiDataSource(apiManager: gh<_i132.ApiManager>()),
+    );
+    gh.lazySingleton<_i746.PaymentRepository>(
+      () => _i357.PaymentRepositoryImpl(gh<_i845.PaymentDataSource>()),
     );
     gh.lazySingleton<_i29.CartDataSource>(
       () => _i895.ApiCartDataSource(gh<_i132.ApiManager>(), gh<_i974.Logger>()),
@@ -115,11 +152,29 @@ extension GetItInjectableX on _i174.GetIt {
     gh.lazySingleton<_i878.GetProductUsecase>(
       () => _i878.GetProductUsecase(reposiroty: gh<_i410.ProductReposiroty>()),
     );
+    gh.factory<_i746.AddCheckoutUsecase>(
+      () => _i746.AddCheckoutUsecase(gh<_i746.PaymentRepository>()),
+    );
     gh.factory<_i50.LoginUseCase>(
       () => _i50.LoginUseCase(gh<_i877.AuthRepository>()),
     );
     gh.factory<_i70.RegisterUseCase>(
       () => _i70.RegisterUseCase(gh<_i877.AuthRepository>()),
+    );
+    gh.lazySingleton<_i693.FavoRepository>(
+      () => _i1032.FavoRepositoryImpl(gh<_i565.FavoDataSource>()),
+    );
+    gh.singleton<_i940.GetFavouriteItems>(
+      () => _i940.GetFavouriteItems(gh<_i693.FavoRepository>()),
+    );
+    gh.singleton<_i357.RemoveItemUsecase>(
+      () => _i357.RemoveItemUsecase(gh<_i693.FavoRepository>()),
+    );
+    gh.factory<_i365.CheckoutCubit>(
+      () => _i365.CheckoutCubit(gh<_i746.AddCheckoutUsecase>()),
+    );
+    gh.singleton<_i790.AddToFavouriteUsecase>(
+      () => _i790.AddToFavouriteUsecase(gh<_i693.FavoRepository>()),
     );
     gh.lazySingleton<_i947.CartRepository>(
       () => _i86.CartRepositoryImpl(gh<_i29.CartDataSource>()),
@@ -142,6 +197,13 @@ extension GetItInjectableX on _i174.GetIt {
     gh.singleton<_i363.AuthCubit>(
       () =>
           _i363.AuthCubit(gh<_i50.LoginUseCase>(), gh<_i70.RegisterUseCase>()),
+    );
+    gh.factory<_i228.FavouriteCubit>(
+      () => _i228.FavouriteCubit(
+        gh<_i940.GetFavouriteItems>(),
+        gh<_i790.AddToFavouriteUsecase>(),
+        gh<_i357.RemoveItemUsecase>(),
+      ),
     );
     gh.singleton<_i827.RemoveProductFromcartUsecase>(
       () => _i827.RemoveProductFromcartUsecase(
