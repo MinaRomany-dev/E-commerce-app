@@ -222,8 +222,6 @@ import 'package:toastification/toastification.dart';
 class Login extends StatelessWidget {
   Login({super.key});
 
-  static const String routename = "/login";
-
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
   final _formKey = GlobalKey<FormState>();
@@ -248,6 +246,7 @@ class Login extends StatelessWidget {
             description: "Login Successfully",
             type: ToastificationType.success,
           );
+          Navigator.of(context).pushReplacementNamed(Routes.home);
         }
       },
       builder: (context, state) {
@@ -352,10 +351,10 @@ class Login extends StatelessWidget {
                             alignment: Alignment.centerRight,
                             child: InkWell(
                               onTap: () {
-                                // Navigator.pushNamed(
-                                //   context,
-                                //   Routes.forgotpassword,
-                                // );
+                                Navigator.pushNamed(
+                                  context,
+                                  Routes.forgetpassword,
+                                );
                               },
 
                               child: Text(
@@ -387,9 +386,6 @@ class Login extends StatelessWidget {
                                             password: _passwordController.text,
                                           ),
                                         );
-                                        Navigator.of(
-                                          context,
-                                        ).pushReplacementNamed(Routes.home);
                                       }
                                     },
 

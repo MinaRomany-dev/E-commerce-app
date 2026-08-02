@@ -18,14 +18,22 @@ import 'package:ecommerce2/features/auth/data/data_source/local/secure_storage_d
     as _i543;
 import 'package:ecommerce2/features/auth/data/data_source/remote/api_datasource.dart'
     as _i255;
-import 'package:ecommerce2/features/auth/data/data_source/remote/auth_datasource.dart'
-    as _i198;
+import 'package:ecommerce2/features/auth/data/data_source/remote/remote_auth_data_source.dart'
+    as _i302;
 import 'package:ecommerce2/features/auth/data/repository/auth_repositoryimple.dart'
     as _i486;
 import 'package:ecommerce2/features/auth/domain/repositories/auth_repository.dart'
     as _i877;
+import 'package:ecommerce2/features/auth/domain/use_case/forget_usecase.dart'
+    as _i727;
 import 'package:ecommerce2/features/auth/domain/use_case/login.dart' as _i50;
+import 'package:ecommerce2/features/auth/domain/use_case/logout_usecase.dart'
+    as _i172;
 import 'package:ecommerce2/features/auth/domain/use_case/register.dart' as _i70;
+import 'package:ecommerce2/features/auth/domain/use_case/reset_password_usecase.dart'
+    as _i434;
+import 'package:ecommerce2/features/auth/domain/use_case/verify_code_usecase.dart'
+    as _i718;
 import 'package:ecommerce2/features/auth/presentation/cubit/cubit/auth_cubit.dart'
     as _i363;
 import 'package:ecommerce2/features/cart/data/data_source/api_cart_data_source.dart'
@@ -88,8 +96,8 @@ import 'package:ecommerce2/features/payment/data/repositories/checkout_repositor
     as _i357;
 import 'package:ecommerce2/features/payment/domain/repo/checkout_repository.dart'
     as _i746;
-import 'package:ecommerce2/features/payment/domain/usecase/do_checkout_usecase.dart'
-    as _i746;
+import 'package:ecommerce2/features/payment/domain/usecase/add_checkout_usecase.dart'
+    as _i326;
 import 'package:ecommerce2/features/payment/presentation/cubit/checkout_cubit.dart'
     as _i365;
 import 'package:flutter_secure_storage/flutter_secure_storage.dart' as _i558;
@@ -125,15 +133,6 @@ extension GetItInjectableX on _i174.GetIt {
     gh.lazySingleton<_i845.PaymentDataSource>(
       () => _i459.ApiPaymentDatasource(gh<_i132.ApiManager>()),
     );
-    gh.singleton<_i198.RemoteauthDatasource>(
-      () => _i255.ApiDataSource(apimanager: gh<_i132.ApiManager>()),
-    );
-    gh.singleton<_i877.AuthRepository>(
-      () => _i486.AuthRepositoryImpl(
-        gh<_i660.LocalauthDatasouce>(),
-        gh<_i198.RemoteauthDatasource>(),
-      ),
-    );
     gh.lazySingleton<_i108.RemoteProductDatasource>(
       () => _i92.ProductApiDataSource(apiManager: gh<_i132.ApiManager>()),
     );
@@ -149,17 +148,17 @@ extension GetItInjectableX on _i174.GetIt {
         localProductDatasource: gh<_i119.ProductLocalDataSource>(),
       ),
     );
+    gh.singleton<_i302.RemoteauthDatasource>(
+      () => _i255.ApiDataSource(
+        apimanager: gh<_i132.ApiManager>(),
+        localauthDatasouce: gh<_i660.LocalauthDatasouce>(),
+      ),
+    );
     gh.lazySingleton<_i878.GetProductUsecase>(
       () => _i878.GetProductUsecase(reposiroty: gh<_i410.ProductReposiroty>()),
     );
-    gh.factory<_i746.AddCheckoutUsecase>(
-      () => _i746.AddCheckoutUsecase(gh<_i746.PaymentRepository>()),
-    );
-    gh.factory<_i50.LoginUseCase>(
-      () => _i50.LoginUseCase(gh<_i877.AuthRepository>()),
-    );
-    gh.factory<_i70.RegisterUseCase>(
-      () => _i70.RegisterUseCase(gh<_i877.AuthRepository>()),
+    gh.factory<_i326.AddCheckoutUsecase>(
+      () => _i326.AddCheckoutUsecase(gh<_i746.PaymentRepository>()),
     );
     gh.lazySingleton<_i693.FavoRepository>(
       () => _i1032.FavoRepositoryImpl(gh<_i565.FavoDataSource>()),
@@ -170,14 +169,17 @@ extension GetItInjectableX on _i174.GetIt {
     gh.singleton<_i357.RemoveItemUsecase>(
       () => _i357.RemoveItemUsecase(gh<_i693.FavoRepository>()),
     );
-    gh.factory<_i365.CheckoutCubit>(
-      () => _i365.CheckoutCubit(gh<_i746.AddCheckoutUsecase>()),
-    );
     gh.singleton<_i790.AddToFavouriteUsecase>(
       () => _i790.AddToFavouriteUsecase(gh<_i693.FavoRepository>()),
     );
     gh.lazySingleton<_i947.CartRepository>(
       () => _i86.CartRepositoryImpl(gh<_i29.CartDataSource>()),
+    );
+    gh.singleton<_i877.AuthRepository>(
+      () => _i486.AuthRepositoryImpl(
+        gh<_i660.LocalauthDatasouce>(),
+        gh<_i302.RemoteauthDatasource>(),
+      ),
     );
     gh.singleton<_i150.AddProductTocartUsecase>(
       () => _i150.AddProductTocartUsecase(gh<_i947.CartRepository>()),
@@ -194,9 +196,8 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i587.ProductCubit>(
       () => _i587.ProductCubit(gh<_i878.GetProductUsecase>()),
     );
-    gh.singleton<_i363.AuthCubit>(
-      () =>
-          _i363.AuthCubit(gh<_i50.LoginUseCase>(), gh<_i70.RegisterUseCase>()),
+    gh.factory<_i365.CheckoutCubit>(
+      () => _i365.CheckoutCubit(gh<_i326.AddCheckoutUsecase>()),
     );
     gh.factory<_i228.FavouriteCubit>(
       () => _i228.FavouriteCubit(
@@ -204,6 +205,24 @@ extension GetItInjectableX on _i174.GetIt {
         gh<_i790.AddToFavouriteUsecase>(),
         gh<_i357.RemoveItemUsecase>(),
       ),
+    );
+    gh.factory<_i50.LoginUseCase>(
+      () => _i50.LoginUseCase(gh<_i877.AuthRepository>()),
+    );
+    gh.factory<_i70.RegisterUseCase>(
+      () => _i70.RegisterUseCase(gh<_i877.AuthRepository>()),
+    );
+    gh.singleton<_i172.LogoutUsecase>(
+      () => _i172.LogoutUsecase(gh<_i877.AuthRepository>()),
+    );
+    gh.factory<_i727.ForgetPasswordUseCase>(
+      () => _i727.ForgetPasswordUseCase(gh<_i877.AuthRepository>()),
+    );
+    gh.factory<_i434.ResetPasswordUseCase>(
+      () => _i434.ResetPasswordUseCase(gh<_i877.AuthRepository>()),
+    );
+    gh.factory<_i718.VerifyCodeUseCase>(
+      () => _i718.VerifyCodeUseCase(gh<_i877.AuthRepository>()),
     );
     gh.singleton<_i827.RemoveProductFromcartUsecase>(
       () => _i827.RemoveProductFromcartUsecase(
@@ -217,6 +236,16 @@ extension GetItInjectableX on _i174.GetIt {
         gh<_i827.RemoveProductFromcartUsecase>(),
         gh<_i542.UpdateCartitemQuantityUsecase>(),
         gh<_i925.ClearCartUsecase>(),
+      ),
+    );
+    gh.singleton<_i363.AuthCubit>(
+      () => _i363.AuthCubit(
+        gh<_i727.ForgetPasswordUseCase>(),
+        gh<_i718.VerifyCodeUseCase>(),
+        gh<_i434.ResetPasswordUseCase>(),
+        gh<_i172.LogoutUsecase>(),
+        gh<_i50.LoginUseCase>(),
+        gh<_i70.RegisterUseCase>(),
       ),
     );
     return this;

@@ -1,13 +1,8 @@
-
-
 class PaymentEntity {
   final String status;
   final SessionEntity session;
 
-  PaymentEntity({
-    required this.status,
-    required this.session,
-  });
+  PaymentEntity({required this.status, required this.session});
 }
 
 class SessionEntity {
@@ -21,4 +16,3 @@ class SessionEntity {
     required this.cancelUrl,
   });
 }
-

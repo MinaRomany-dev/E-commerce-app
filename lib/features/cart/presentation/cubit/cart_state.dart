@@ -30,13 +30,3 @@ class CartAddedSuccess extends CartState {
 
   const CartAddedSuccess(this.message);
 }
-
-sealed class CounterState {
-  final int count;
-  final String message;
-  const CounterState(this.count, this.message);
-}
-
-class CounterInitial extends CounterState {
-  const CounterInitial(int mm) : super(mm, "");
-}

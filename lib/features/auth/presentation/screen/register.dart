@@ -1,9 +1,9 @@
 import 'package:ecommerce2/core/resources/styles_manager.dart';
+import 'package:ecommerce2/core/routes/routes.dart';
 import 'package:ecommerce2/core/validator/validator.dart';
 import 'package:ecommerce2/core/widgets/customtxtfield.dart';
 import 'package:ecommerce2/features/auth/data/models/signup/signup_request.dart';
 import 'package:ecommerce2/features/auth/presentation/cubit/cubit/auth_cubit.dart';
-import 'package:ecommerce2/features/auth/presentation/screen/login.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -166,7 +166,7 @@ class _RegisterState extends State<Register> {
                       child: ElevatedButton(
                         onPressed: () async {
                           if (_formkey.currentState!.validate()) {
-                            await context.read<AuthCubit>().register(
+                            await context.read<AuthCubit>().Register(
                               Signuprequest(
                                 name: usernameController.text.trim(),
                                 email: emailController.text.trim(),
@@ -177,7 +177,7 @@ class _RegisterState extends State<Register> {
 
                             Navigator.of(
                               context,
-                            ).pushReplacementNamed(Login.routename);
+                            ).pushReplacementNamed(Routes.login);
                           }
                         },
                         style: ElevatedButton.styleFrom(
@@ -216,7 +216,7 @@ class _RegisterState extends State<Register> {
                     onTap: () {
                       Navigator.of(
                         context,
-                      ).pushReplacementNamed(Login.routename);
+                      ).pushReplacementNamed(Routes.login);
                     },
                     child: Text(
                       "Login",

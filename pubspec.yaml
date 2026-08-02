@@ -14,6 +14,7 @@ dependencies:
   connectivity_plus: ^7.1.1
   cupertino_icons: ^1.0.8
   dartz: ^0.10.1
+  device_info_plus: ^13.2.0
   dio: ^5.9.2
   flutter:
     sdk: flutter
@@ -26,8 +27,12 @@ dependencies:
   get_it: ^9.2.1
   google_nav_bar: ^5.0.7
   google_sign_in: ^7.2.0
+  image_picker: ^1.2.3
   injectable: ^2.4.2
   logger: ^2.7.0
+  lottie: ^3.3.3
+  permission_handler: ^12.0.0
+  pinput: ^6.0.2
   pretty_dio_logger: ^1.4.0
   shimmer: ^3.0.0
   smooth_page_indicator: ^1.1.0
@@ -54,3 +59,4 @@ flutter:
   assets:
     - assets/images/
     - assets/svg/
+    - assets/animations/

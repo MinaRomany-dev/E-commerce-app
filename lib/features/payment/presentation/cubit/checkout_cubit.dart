@@ -1,6 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:ecommerce2/features/payment/domain/entity/checkout.dart';
-import 'package:ecommerce2/features/payment/domain/usecase/do_checkout_usecase.dart';
+import 'package:ecommerce2/features/payment/domain/usecase/add_checkout_usecase.dart';
 import 'package:injectable/injectable.dart';
 import 'package:meta/meta.dart';
 

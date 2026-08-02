@@ -1,8 +1,8 @@
 import 'package:dio/dio.dart';
 import 'package:ecommerce2/core/constants/constants.dart';
 import 'package:ecommerce2/features/auth/data/data_source/local/local_datasource.dart';
-import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 import 'package:injectable/injectable.dart';
+import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 
 @singleton
 class ApiManager {
@@ -10,7 +10,6 @@ class ApiManager {
   late final Dio dio;
   String? _cachedToken;
   ApiManager(this.localauthDatasouce) {
-    print("🔥 API MANAGER INSTANCE CREATED");
     dio = Dio(
       BaseOptions(
         baseUrl: Constants.baseUrl,
@@ -26,7 +25,6 @@ class ApiManager {
       InterceptorsWrapper(
         onRequest: (options, handler) async {
           final isAuthRequest =
-              options.path.contains('/auth/') ||
               options.path.contains('/signin') ||
               options.path.contains('/signup');
 

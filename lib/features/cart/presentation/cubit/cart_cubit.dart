@@ -17,7 +17,7 @@ class CartCubit extends Cubit<CartState> {
   final RemoveProductFromcartUsecase removeProductFromCartUsecase;
   final UpdateCartitemQuantityUsecase updateCartItemQuantityUsecase;
   final ClearCartUsecase clearCartUsecase;
-  late CartDataEntity cartdata;
+  CartDataEntity? cartdata;
 
   CartCubit(
     this.getCartproductsUsecase,
@@ -35,7 +35,10 @@ class CartCubit extends Cubit<CartState> {
 
     result.fold((failure) => emit(CartError(failure.failmessage)), (cart) {
       cartdata = cart;
-      emit(CartLoaded(cartdata: cartdata));
+      if (cartdata == null) {
+        emit(CartError("Cart is empty"));
+      }
+      emit(CartLoaded(cartdata: cartdata!));
     });
   }
 
@@ -55,7 +58,10 @@ class CartCubit extends Cubit<CartState> {
 
     result.fold((failure) => emit(CartError(failure.failmessage)), (cart) {
       cartdata = cart;
-      emit(CartLoaded(cartdata: cartdata));
+      if (cartdata == null) {
+        emit(CartError("Cart is empty"));
+      }
+      emit(CartLoaded(cartdata: cartdata!));
     });
   }
 
@@ -66,19 +72,10 @@ class CartCubit extends Cubit<CartState> {
     result.fold((failure) => emit(CartError(failure.failmessage)), (cart) {
       cartdata = cart;
 
-      emit(CartLoaded(cartdata: cartdata));
-    });
-  }
-
-  /// CLEAR CART
-  Future<void> clearCart() async {
-    emit(CartLoading());
-
-    final result = await clearCartUsecase();
-
-    result.fold((failure) => emit(CartError(failure.failmessage)), (cart) {
-      cartdata = cart;
-      emit(CartLoaded(cartdata: cartdata));
+      if (cartdata == null) {
+        emit(CartError("Cart is empty"));
+      }
+      emit(CartLoaded(cartdata: cartdata!));
     });
   }
 }

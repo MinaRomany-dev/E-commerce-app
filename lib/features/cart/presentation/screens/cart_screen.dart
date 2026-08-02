@@ -1,11 +1,14 @@
-import 'package:ecommerce2/core/routes/routes.dart';
+import 'package:ecommerce2/core/utils/toast.dart';
 import 'package:ecommerce2/features/cart/presentation/cubit/cart_cubit.dart';
 import 'package:ecommerce2/features/cart/presentation/screens/widgets/cart_item.dart';
 import 'package:ecommerce2/features/cart/presentation/screens/widgets/default_cart_screens.dart';
 import 'package:ecommerce2/features/cart/presentation/screens/widgets/shimmer_cart_screen.dart';
+import 'package:ecommerce2/features/payment/presentation/cubit/checkout_cubit.dart';
+import 'package:ecommerce2/features/payment/presentation/screens/checkout_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:toastification/toastification.dart';
 
 class CartScreen extends StatefulWidget {
   const CartScreen({super.key});
@@ -119,25 +122,51 @@ class _CartScreenState extends State<CartScreen> {
                       isTotal: true,
                     ),
                     SizedBox(height: 5.h),
-                    SizedBox(
-                      width: double.infinity,
-                      height: 50.h,
-                      child: ElevatedButton(
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor: Colors.black,
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(16),
+                    BlocListener<CheckoutCubit, CheckoutState>(
+                      listener: (context, state) {
+                        if (state is CheckoutError) {
+                          AppToast.showToast(
+                            context: context,
+                            title: 'Failed',
+                            description: state.message,
+                            type: ToastificationType.custom(
+                              'failed',
+                              Colors.red,
+                              Icons.error,
+                            ),
+                          );
+                        }
+                        if (state is CheckoutSuccess) {
+                          final checkoutUrl = state.paymentEntity.session.url;
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) =>
+                                  PaymentWebView(url: checkoutUrl),
+                            ),
+                          );
+                        }
+                      },
+                      child: SizedBox(
+                        width: double.infinity,
+                        height: 50.h,
+                        child: ElevatedButton(
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: Colors.black,
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(16),
+                            ),
                           ),
-                        ),
-                        onPressed: () {
-                          Navigator.pushNamed(context, Routes.checkout);
-                        },
-                        child: const Text(
-                          "Checkout",
-                          style: TextStyle(
-                            fontSize: 18,
-                            color: Colors.white,
-                            fontWeight: FontWeight.bold,
+                          onPressed: () {
+                            context.read<CheckoutCubit>().addCheckout(cart.id);
+                          },
+                          child: const Text(
+                            "Pay Now",
+                            style: TextStyle(
+                              fontSize: 18,
+                              color: Colors.white,
+                              fontWeight: FontWeight.bold,
+                            ),
                           ),
                         ),
                       ),

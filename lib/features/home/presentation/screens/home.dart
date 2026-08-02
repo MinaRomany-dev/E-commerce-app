@@ -4,7 +4,7 @@ import 'package:ecommerce2/features/cart/presentation/screens/cart_screen.dart';
 import 'package:ecommerce2/features/favourite/presentation/cubit/cubit/favourite_cubit.dart';
 import 'package:ecommerce2/features/favourite/presentation/screens/saved_items_screen.dart';
 import 'package:ecommerce2/features/home/presentation/screens/home_tab.dart';
-import 'package:ecommerce2/features/home/presentation/screens/profile.dart';
+import 'package:ecommerce2/features/profile/presentation/screens/profile.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
