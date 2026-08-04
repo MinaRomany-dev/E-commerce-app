@@ -1,141 +1,153 @@
-# Elite Shop 🛍️
 
-A Flutter e-commerce application that allows users to browse products, manage their cart, add products to favorites, and complete checkout operations.
+APP Review 
+<p align="center">
+  <img src="screensshots/home.png" width="250"/>
+  <img src="screensshots/details.png" width="250"/>
+  <img src="screensshots/cart.png" width="250"/>
+  <img src="screensshots/pay.png" width="250"/>
+  <img src="screensshots/search.png" width="250"/>
+  <img src="screensshots/fav.png" width="250"/>
+</p>
 
-## Overview
 
-Elite Shop is a shopping application built with Flutter.  
-The application provides users with product browsing, product details, authentication features, cart management, favorites management, and checkout functionality.
+# 🛍️ Elite Shop
 
-## Features
+A Flutter e-commerce application that provides a smooth shopping experience with product browsing, cart management, favorites, authentication, and checkout features.
 
-### Authentication
-- User login.
-- User registration.
-- Forget password.
-- Verify reset code.
-- Reset password.
-- Token storage and verification.
+## 📱 Overview
 
-### Products
-- Display product details.
-- Show product images.
-- Show product description.
-- Display product rating.
-- Add products to cart.
+Elite Shop is a Flutter application designed to provide users with an easy and modern shopping experience.
 
-### Cart
-- Get cart data.
-- Add product to cart.
-- Update product quantity.
-- Remove product from cart.
-- Clear cart.
+Users can browse products, view product details, manage their cart, add products to favorites, and complete checkout operations.
 
-### Favorites
-- Get favorite products.
-- Add products to favorites.
-- Remove products from favorites.
+---
 
-### Checkout
-- Create checkout request.
+## ✨ Features
 
-### Profile
-- Display user profile information.
-- Pick profile image from camera.
-- Pick profile image from gallery.
-- Logout.
+### 🔐 Authentication
+- ✅ User Login
+- ✅ User Registration
+- ✅ Forget Password
+- ✅ Verify Reset Code
+- ✅ Reset Password
+- ✅ Token Storage & Verification
 
-## Screens
+### 🏠 Home & Products
+- ✅ Display products.
+- ✅ View product details.
+- ✅ Product images slider.
+- ✅ Product rating display.
+- ✅ Pagination for loading products.
+- ✅ Product caching in Home using local database.
 
-- Splash Screen.
-- Login Screen.
-- Product Details Screen.
-- Profile Screen.
+### 🛒 Cart
+- ✅ Get cart data.
+- ✅ Add products to cart.
+- ✅ Update product quantity.
+- ✅ Remove products from cart.
+- ✅ Clear cart.
 
-## Technologies Used
+### ❤️ Favorites
+- ✅ View favorite products.
+- ✅ Add products to favorites.
+- ✅ Remove products from favorites.
 
-- Flutter
-- Dart
-- Flutter Bloc
-- Dio
-- Sqflite
-- Flutter Secure Storage
-- Injectable
-- Get It
+### 💳 Checkout
+- ✅ Create checkout request.
 
-## Packages
+### 👤 Profile
+- ✅ Display profile information.
+- ✅ Select profile image from camera.
+- ✅ Select profile image from gallery.
+- ✅ Logout.
 
-Main packages used:
+---
 
-- `dio` - API requests.
-- `pretty_dio_logger` - Logging network requests.
-- `flutter_bloc` - State management.
-- `sqflite` - Local database.
-- `flutter_secure_storage` - Secure token storage.
-- `injectable` - Dependency injection.
-- `get_it` - Service locator.
-- `cached_network_image` - Network image caching.
-- `carousel_slider` - Product image slider.
-- `image_picker` - Pick images from camera and gallery.
-- `permission_handler` - Handle permissions.
-- `lottie` - Display animations.
-- `webview_flutter` - WebView support.
+## 🏗️ Architecture
 
-## API Handling
+The project follows **Clean Architecture** principles:
 
-The application uses Dio for handling API requests with:
+- 📂 Presentation Layer
+- 📂 Domain Layer
+- 📂 Data Layer
 
-- GET requests.
-- POST requests.
-- PUT requests.
-- DELETE requests.
+This separation helps create organized, maintainable, and scalable code.
 
-It also includes:
-- Request timeout handling.
-- Token attachment using Dio interceptor.
-- Error handling for different response status codes.
+---
 
-## Local Storage
+## 🧩 State Management
 
-The application uses:
+- 🔹 Flutter Bloc
 
-### Flutter Secure Storage
-Used for storing and retrieving authentication token.
+Used for managing application states and handling UI updates.
 
-### Sqflite Database
-Used for local product storage with a `products` table.
+---
 
-Stored product data includes:
+## 🔌 Dependency Injection
 
-- id
-- title
-- description
-- price
-- imageCover
-- images
-- categoryName
-- ratingsAverage
-- ratingsQuantity
-- priceAfterDiscount
+Implemented using:
 
-## Project Dependencies
+- 📦 Injectable
+- 📦 Get It
 
-The project uses:
+---
 
-- Flutter SDK
-- Dart SDK ^3.9.2
+## 🌐 API Handling
 
-## Assets
+Using Dio for network communication:
 
-The project includes:
+- 🔹 GET requests
+- 🔹 POST requests
+- 🔹 PUT requests
+- 🔹 DELETE requests
 
-- Images assets.
-- SVG assets.
-- Lottie animation assets.
+Includes:
 
-## Installation
+- ⏳ Request timeout handling.
+- 🔑 Automatic token attachment.
+- ⚠️ API error handling.
 
-1. Clone the repository.
+---
+
+## 💾 Local Storage
+
+### 🔐 Flutter Secure Storage
+Used for storing authentication tokens securely.
+
+### 🗄️ Sqflite Database
+Used for caching products in the Home feature.
+
+The cached product data includes:
+
+- Product ID
+- Title
+- Description
+- Price
+- Images
+- Category
+- Rating
+- Discount price
+
+---
+
+## 📦 Main Packages
+
+- `flutter_bloc` → State management
+- `dio` → API requests
+- `sqflite` → Local database
+- `flutter_secure_storage` → Secure token storage
+- `injectable` → Dependency injection
+- `get_it` → Service locator
+- `cached_network_image` → Image caching
+- `carousel_slider` → Product images slider
+- `image_picker` → Camera & gallery images
+- `lottie` → Animations
+
+---
+
+## 🚀 Getting Started
+
+### Clone the repository
 
 ```bash
 git clone <repository-url>
