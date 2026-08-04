@@ -33,12 +33,6 @@ class ApiManager {
 
             if (_cachedToken != null && _cachedToken!.isNotEmpty) {
               options.headers["token"] = _cachedToken;
-
-              print(
-                " ✅ Token Added from cache: ${_cachedToken!.substring(0, 30)}...",
-              );
-            } else {
-              print("❌ No token in cache!");
             }
           }
 

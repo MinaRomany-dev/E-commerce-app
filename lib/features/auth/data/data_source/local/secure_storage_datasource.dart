@@ -13,8 +13,8 @@ class SecureStorageDatasource extends LocalauthDatasouce {
   Future<String?> getToken() async {
     try {
       return await storage.read(key: _tokenkey);
-    } catch (e, stack) {
-      print('🧨 $stack');
+    } catch (e) {
+     
       throw LocalException('Failed to get token');
     }
   }
@@ -23,17 +23,15 @@ class SecureStorageDatasource extends LocalauthDatasouce {
   Future<void> saveToken(String token) async {
     try {
       await storage.write(key: _tokenkey, value: token);
-    } catch (e, stack) {
-      print('🧨 $stack');
+    } catch (e) {
       throw LocalException('Failed to save token');
     }
   }
-
+  @override
   Future<void> deleteToken() async {
     try {
       await storage.delete(key: _tokenkey);
-    } catch (e, stack) {
-      print('🧨 $stack');
+    } catch (e) {
       throw LocalException('Failed to delete token');
     }
   }

@@ -22,8 +22,8 @@ class ApiCartDataSource extends CartDataSource {
       );
 
       return CartResponseModel.fromJson(response.data);
-    } catch (e, stack) {
-      print('$stack');
+    } catch (e) {
+     
       logger.f("  error is  $e, stackTrace: ${StackTrace.current}");
       if (e is DioException) {
         throw handleDioError(e);
