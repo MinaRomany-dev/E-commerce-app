@@ -1,5 +1,5 @@
 
-APP Review 
+# 📱 APP Review 
 <p align="center">
   <img src="screensshots/home.png" width="250"/>
   <img src="screensshots/details.png" width="250"/>
@@ -16,10 +16,7 @@ A Flutter e-commerce application that provides a smooth shopping experience with
 
 ## 📱 Overview
 
-Elite Shop is a Flutter application designed to provide users with an easy and modern shopping experience.
-
-Users can browse products, view product details, manage their cart, add products to favorites, and complete checkout operations.
-
+Elite Shop is a Flutter e-commerce application that provides users with product browsing, cart operations, authentication, favorites adding, and checkout functionality.
 ---
 
 ## ✨ Features
