@@ -1,10 +1,10 @@
 
 # 📱 APP Review 
 <p align="center">
-  <img src="screensshots/home.png" width="250"/>
-  <img src="screensshots/details.png" width="250"/>
-  <img src="screensshots/cart.png" width="250"/>
   <img src="screensshots/pay.png" width="250"/>
+  <img src="screensshots/home.png" width="250"/>
+   <img src="screensshots/cart.png" width="250"/>
+  <img src="screensshots/details.png" width="250"/>
   <img src="screensshots/search.png" width="250"/>
   <img src="screensshots/fav.png" width="250"/>
 </p>
